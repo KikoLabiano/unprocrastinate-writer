@@ -1,0 +1,30 @@
+.musicPlayerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.musicPlayerWrapper svg {
+  cursor: pointer;
+}
+.musicPlayerWrapper div {
+  line-height: 2;
+}
+.musicPlayerControls svg {
+  margin-right: 0.4rem;
+}
+.musicPlayerView {
+  content: '';
+  display: block;
+  height: 3rem;
+}
+.randomSelected {
+  color: green;
+}
+.songInfo {
+  display: flex;
+  font-size: 8pt;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

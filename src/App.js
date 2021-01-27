@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { RecoilRoot } from 'recoil';
+
 import { UnprocrastinateWriter } from './ui/views/UnprocrastinateWriter';
 
 const App = () => (
@@ -15,7 +17,9 @@ const App = () => (
         Learn React
       </a>
     </header> */}
-    <UnprocrastinateWriter></UnprocrastinateWriter>
+    <RecoilRoot>
+      <UnprocrastinateWriter></UnprocrastinateWriter>
+    </RecoilRoot>
   </div>
 );
 

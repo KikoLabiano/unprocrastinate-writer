@@ -1,0 +1,111 @@
+.wrapper {
+  background: linear-gradient(to left, #b2b2b2, #333333);
+}
+.wavesWrapper {
+  width: 100px;
+  position: absolute;
+  /* top: 20%;
+  left: 50%; */
+  /* transform: translate(-50%, 50%); */
+}
+
+.line {
+  width: 15px;
+  height: 25px;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  position: fixed;
+}
+
+.line1 {
+  background-color: aquamarine;
+  animation: animate1 1.5s linear infinite;
+  top: 200px;
+  left: 60px;
+}
+.line2 {
+  background-color: bisque;
+  animation: animate2 2.1s linear infinite;
+  top: 200px;
+  left: 95px;
+}
+.line3 {
+  background-color: aquamarine;
+  animation: animate3 1.4s linear infinite;
+  top: 200px;
+  left: 130px;
+}
+.line4 {
+  background-color: aquamarine;
+  animation: animate5 1.5s linear infinite;
+  top: 200px;
+  left: 165px;
+}
+.line5 {
+  background-color: aquamarine;
+  animation: animate5 1.5s linear infinite;
+  top: 200px;
+  left: 200px;
+}
+.line6 {
+  background-color: aquamarine;
+  animation: animate6 1.5s linear infinite;
+  top: 200px;
+  left: 235px;
+}
+.line7 {
+  background-color: aquamarine;
+  animation: animate7 1.5s linear infinite;
+  top: 200px;
+  left: 270px;
+}
+
+@keyframes animate1 {
+  50% {
+    background-color: #000;
+    top: 50px;
+    height: 110px;
+  }
+}
+@keyframes animate2 {
+  50% {
+    background-color: #000;
+    top: 70px;
+    height: 70px;
+  }
+}
+@keyframes animate3 {
+  50% {
+    background-color: #000;
+    top: 150px;
+    height: 90px;
+  }
+}
+@keyframes animate4 {
+  50% {
+    background-color: #000;
+    top: 50px;
+    height: 110px;
+  }
+}
+@keyframes animate5 {
+  50% {
+    background-color: #000;
+    top: 70px;
+    height: 70px;
+  }
+}
+@keyframes animate6 {
+  50% {
+    background-color: #000;
+    top: 150px;
+    height: 90px;
+  }
+}
+@keyframes animate7 {
+  50% {
+    background-color: #000;
+    top: 150px;
+    height: 90px;
+  }
+}

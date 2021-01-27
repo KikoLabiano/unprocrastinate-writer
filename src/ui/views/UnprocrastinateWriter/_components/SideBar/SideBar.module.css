@@ -1,4 +1,18 @@
-.sideNav div {
+.icon {
+  position: absolute;
+  right: 1rem;
+}
+
+.sideNavElement:hover {
+  left: 0;
+}
+
+.sideNavElement {
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  z-index: 1;
+  background: inherit;
+  overflow: hidden;
   position: absolute;
   left: -80px;
   transition: 0.3s;
@@ -10,10 +24,16 @@
   border-radius: 0 5px 5px 0;
 }
 
-.sideNav div:hover {
+.sideNavElement:before {
+  content: '';
+  position: absolute;
+  background: inherit;
+  z-index: -1;
+  top: 0;
   left: 0;
-}
-
-.sideNavElement {
-  height: 100px;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 200px rgba(255, 255, 255, 0.5);
+  filter: blur(30px);
+  margin: -20px;
 }

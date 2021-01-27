@@ -3,6 +3,7 @@
   background-size: cover;
   display: grid;
   height: 100vh;
+  transition: 0.3s;
 }
 .container {
   width: 80%;
