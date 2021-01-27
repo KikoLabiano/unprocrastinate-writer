@@ -6,10 +6,13 @@ const Writer = ({ fontOptions = { fontColor: 'white', fontSize: '2rem', fontFami
   return (
     <textarea
       className={styles.writerArea}
+      placeholder="Start writing..."
       rows={30}
-      style={{ color: fontOptions.fontColor, fontSize: fontOptions.fontSize, fontFamily: fontOptions.fontFamily }}>
-      Text goes here
-    </textarea>
+      style={{
+        color: fontOptions.fontColor,
+        fontSize: fontOptions.fontSize,
+        fontFamily: fontOptions.fontFamily
+      }}></textarea>
   );
 };
 

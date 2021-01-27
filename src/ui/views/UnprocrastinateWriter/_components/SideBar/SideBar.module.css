@@ -1,4 +1,4 @@
-.sideNav a {
+.sideNav div {
   position: absolute;
   left: -80px;
   transition: 0.3s;
@@ -10,26 +10,10 @@
   border-radius: 0 5px 5px 0;
 }
 
-.sideNav a:hover {
+.sideNav div:hover {
   left: 0;
 }
 
-#about {
-  top: 20px;
-  background-color: #4caf50;
-}
-
-#blog {
-  top: 80px;
-  background-color: #2196f3;
-}
-
-#projects {
-  top: 140px;
-  background-color: #f44336;
-}
-
-#contact {
-  top: 200px;
-  background-color: #555;
+.sideNavElement {
+  height: 100px;
 }

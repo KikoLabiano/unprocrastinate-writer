@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": "src"
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "public"]
+    "baseUrl": ".",
+    "paths": {
+      "svg/*": ["src/svg/*"],
+      "components/*": ["src/components/*"],
+      "ui/*": ["src/ui/*"]
+    }
+  }
 }

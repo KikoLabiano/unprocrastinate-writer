@@ -1,11 +1,3 @@
-html,
-body {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  overflow-x: hidden;
-}
-
 .text-container {
   padding: 20px;
   height: 100%;
@@ -16,13 +8,40 @@ body {
   background: transparent;
   resize: none;
   border: 0 none;
-  width: 90%;
+  width: 95%;
   font-size: 2em;
   outline: none;
   height: 100%;
-  margin: 4rem 0 0 10rem;
+  padding: 2rem 0 0 2rem;
 }
 
 .writerArea {
   vertical-align: top;
+  scrollbar-width: thin;
+  scrollbar-color: black white;
+}
+
+.writerArea::placeholder {
+  color: white;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.writerArea::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+
+.writerArea::-webkit-scrollbar-track {
+  background: transparent;
+  /* border-left: 1px solid var(--gray-25);
+  border-right: 1px solid var(--gray-25); */
+}
+
+.writerArea::-webkit-scrollbar-thumb {
+  background: rgb(192, 192, 192);
+}
+
+.writerArea::-webkit-scrollbar-thumb:hover {
+  background: rgb(192, 192, 192);
 }
