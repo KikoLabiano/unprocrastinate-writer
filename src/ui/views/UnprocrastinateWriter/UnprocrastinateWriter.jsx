@@ -23,8 +23,8 @@ const UnprocrastinateWriter = () => {
       <SideBar
         options={[
           { id: 'background', label: 'Background', icon: 'image', top: '150', height: '100' },
-          { id: 'font', label: 'Font', icon: 'font', top: '300', height: '100' },
-          { id: 'music', label: 'Music', icon: 'music', top: '450', height: '200' }
+          { id: 'font', label: 'Font', icon: 'font', top: '300', height: '200' },
+          { id: 'music', label: 'Music', icon: 'music', top: '550', height: '200' }
         ]}>
         {[
           <Gallery numberOfBackgrounds={backgroundProperties.listOfBackgrounds.length}></Gallery>,

@@ -1,7 +1,16 @@
 import React from 'react';
 
-const InputText = ({ onInput, onKeyPress, step = 1, type = 'text', value }) => {
-  return <input onInput={onInput} type={type} onKeyPress={onKeyPress} step={step} value={value}></input>;
+const InputText = ({ className, onInput, onKeyPress, step = 1, type = 'text', value }) => {
+  console.log({ value });
+  return (
+    <input
+      className={className}
+      onInput={onInput}
+      onKeyPress={onKeyPress}
+      step={step}
+      type={type}
+      value={value}></input>
+  );
 };
 
 export { InputText };

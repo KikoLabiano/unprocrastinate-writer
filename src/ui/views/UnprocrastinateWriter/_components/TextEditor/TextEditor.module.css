@@ -1,0 +1,24 @@
+.textEditorWrapper {
+  margin-top: 2rem;
+}
+.fontColorInput {
+  width: 75px;
+}
+.fontSizeInput {
+  width: 50px;
+}
+.optionWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+}
+.optionWrapper span {
+  font-size: 10pt;
+}
+.optionWrapper span:first-child {
+  margin-right: 0.5rem;
+}
+.optionWrapper span:last-child {
+  margin-left: 0.2rem;
+}
