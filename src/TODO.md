@@ -1,6 +1,7 @@
 #Audio
-    * Volume
-    * Waves
+_ Volume
+_ Waves
 #Background
-#Fonts
+#Fonts editor
 #Save/Load text
+#Absolute paths

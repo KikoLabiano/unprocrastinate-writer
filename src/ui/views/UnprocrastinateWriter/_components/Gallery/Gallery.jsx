@@ -3,33 +3,56 @@ import { useRecoilState } from 'recoil';
 
 import styles from './Gallery.module.css';
 
-import { backgroundState, listOfBackgroundsState } from '../../../../../store';
+import { backgroundState } from '../../../../../store';
 
 import { AwesomeIcons } from '../../../../../conf/AwesomeIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Gallery = ({ numberOfBackgrounds }) => {
-  const [background, setBackground] = useRecoilState(backgroundState);
+  const [backgroundProperties, setBackground] = useRecoilState(backgroundState);
 
   const onPreviousBackground = () => {
-    if (background === 0) {
-      setBackground(numberOfBackgrounds - 1);
+    const inmBackgroundProperties = { ...backgroundProperties };
+    if (inmBackgroundProperties.selectedBackground === 0) {
+      inmBackgroundProperties.selectedBackground = numberOfBackgrounds - 1;
     } else {
-      setBackground(background - 1);
+      inmBackgroundProperties.selectedBackground = inmBackgroundProperties.selectedBackground - 1;
     }
+    setBackground(inmBackgroundProperties);
   };
 
   const onNextBackground = () => {
-    if (background === numberOfBackgrounds - 1) {
-      setBackground(0);
+    const inmBackgroundProperties = { ...backgroundProperties };
+    if (inmBackgroundProperties.selectedBackground === numberOfBackgrounds - 1) {
+      inmBackgroundProperties.selectedBackground = 0;
     } else {
-      setBackground(background + 1);
+      inmBackgroundProperties.selectedBackground = inmBackgroundProperties.selectedBackground + 1;
     }
+    console.log(inmBackgroundProperties.selectedBackground);
+    setBackground(inmBackgroundProperties);
+  };
+
+  const onTogglePlayGallery = () => {
+    const inmBackgroundProperties = { ...backgroundProperties };
+
+    if (!inmBackgroundProperties.isPlaying) {
+      // setInterval(() => {
+      //   console.log('llego');
+      //   onNextBackground();
+      // }, 1000);
+    }
+    inmBackgroundProperties.isPlaying = !inmBackgroundProperties.isPlaying;
+    setBackground(inmBackgroundProperties);
   };
 
   return (
     <div className={styles.galleryControls}>
       <FontAwesomeIcon aria-hidden={false} icon={AwesomeIcons('arrowLeft')} onClick={onPreviousBackground} />
+      <FontAwesomeIcon
+        aria-hidden={false}
+        icon={AwesomeIcons(backgroundProperties.isPlaying ? 'pause' : 'play')}
+        onClick={onTogglePlayGallery}
+      />
       <FontAwesomeIcon aria-hidden={false} icon={AwesomeIcons('arrowRight')} onClick={onNextBackground} />
     </div>
   );
