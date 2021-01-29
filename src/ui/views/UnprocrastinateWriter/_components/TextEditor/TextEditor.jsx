@@ -1,9 +1,10 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
-// import Select from 'react-select';
 
 import styles from './TextEditor.module.css';
 
+import { AwesomeIcons } from '../../../../../conf/AwesomeIcons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { InputSelect } from '../../../../views/_components/InputSelect';
 import { InputText } from '../../../../views/_components/InputText';
 
@@ -15,6 +16,7 @@ const TextEditor = () => {
   const getSelectElement = fontValue => fontOptions.fontFamilyList.find(font => font.value === fontValue);
 
   const onChangeFontProperty = (fontProperty, fontPropertyValue) => {
+    console.log(fontPropertyValue);
     const inmFontOptions = { ...fontOptions };
     inmFontOptions[fontProperty] = fontPropertyValue;
     setFontOptions(inmFontOptions);
@@ -27,7 +29,7 @@ const TextEditor = () => {
         <InputText
           className={styles.fontSizeInput}
           onInput={e => onChangeFontProperty('fontSize', e.target.value)}
-          onKeyPress={e => onChangeFontProperty('fontSize', e.target.value)}
+          onChange={e => onChangeFontProperty('fontSize', e.target.value)}
           step={1}
           type="number"
           value={fontOptions.fontSize}></InputText>
@@ -43,13 +45,37 @@ const TextEditor = () => {
           value={fontOptions.fontColor}></InputText>
       </div>
       <div className={styles.optionWrapper}>
-        <span>Font color:</span>
+        <span>Font family:</span>
         <InputSelect
-          className={styles.fontColorSelect}
+          className={styles.fontFamilySelect}
+          filterClassName={styles.fontFamilyFilter}
           onChange={e => onChangeFontProperty('fontFamily', getSelectElement(e.target.value))}
+          onFilter={filtered => onChangeFontProperty('fontFamily', getSelectElement(filtered))}
           options={fontOptions.fontFamilyList}
           value={fontOptions.fontFamily}></InputSelect>
-        {/* <Select options={fontOptions.fontFamilyList} /> */}
+      </div>
+      <div className={styles.optionWrapper}>
+        <span>Font style:</span>
+        <div className={styles.fontWeightStyle}>
+          <FontAwesomeIcon
+            aria-hidden={false}
+            className={fontOptions.fontStyle === 'italic' ? styles.optionSelected : styles.optionUnselected}
+            icon={AwesomeIcons('italic')}
+            onClick={e => onChangeFontProperty('fontStyle', fontOptions.fontStyle === 'italic' ? 'normal' : 'italic')}
+          />
+          <FontAwesomeIcon
+            aria-hidden={false}
+            className={fontOptions.fontWeight === 'bold' ? styles.optionSelected : styles.optionUnselected}
+            icon={AwesomeIcons('bold')}
+            onClick={e => onChangeFontProperty('fontWeight', fontOptions.fontWeight === 'bold' ? 'normal' : 'bold')}
+          />
+        </div>
+        {/* <InputText
+          className={styles.fontColorInput}
+          onInput={e => onChangeFontProperty('fontColor', e.target.value)}
+          onKeyPress={e => onChangeFontProperty('fontColor', e.target.value)}
+          type="color"
+          value={fontOptions.fontColor}></InputText> */}
       </div>
     </div>
   );

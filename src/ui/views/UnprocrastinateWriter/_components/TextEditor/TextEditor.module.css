@@ -1,24 +1,69 @@
 .textEditorWrapper {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 .fontColorInput {
   width: 75px;
+  border-radius: 6px;
+  background-color: transparent;
+  color: white;
+  border: 1px dashed;
+  padding: 0.4rem;
+}
+.fontFamilySelect {
+  border-radius: 6px;
+  background-color: transparent;
+  color: white;
+  border: 1px dashed;
+  padding: 0.4rem;
+}
+.fontFamilySelect option {
+  color: black;
+}
+.fontFamilyFilter {
+  width: 135px;
+  border-radius: 6px;
+  background-color: transparent;
+  color: white;
+  border: 1px dashed;
+  padding: 0.4rem;
+}
+.fontFamilyFilter::placeholder {
+  color: white;
+  font-style: italic;
+  opacity: 0.7;
 }
 .fontSizeInput {
   width: 50px;
+  border-radius: 6px;
+  background-color: transparent;
+  color: white;
+  border: 1px dashed;
+  padding: 0.4rem;
 }
 .optionWrapper {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   margin-bottom: 0.5rem;
+  align-items: center;
 }
 .optionWrapper span {
   font-size: 10pt;
 }
 .optionWrapper span:first-child {
-  margin-right: 0.5rem;
+  width: 100px;
 }
 .optionWrapper span:last-child {
   margin-left: 0.2rem;
+}
+.fontWeightStyle svg:first-child {
+  margin-right: 0.5rem;
+}
+.optionSelected {
+  cursor: pointer;
+  opacity: 1;
+}
+.optionUnselected {
+  cursor: pointer;
+  opacity: 0.5;
 }

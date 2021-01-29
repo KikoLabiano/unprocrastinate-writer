@@ -1,9 +1,11 @@
 import {
   faArrowCircleLeft,
   faArrowCircleRight,
+  faBold,
   faFileAlt,
   faFont,
   faImage,
+  faItalic,
   faMusic,
   faPauseCircle,
   faPlayCircle,
@@ -11,11 +13,14 @@ import {
   faStepBackward,
   faStepForward,
   faStopCircle,
-  faVolumeMute
+  faVolumeMute,
+  faVolumeUp
 } from '@fortawesome/free-solid-svg-icons';
 
 export const AwesomeIcons = icon => {
   switch (icon) {
+    case 'bold':
+      return faBold;
     case 'font':
       return faFont;
     case 'image':
@@ -24,6 +29,8 @@ export const AwesomeIcons = icon => {
       return faArrowCircleLeft;
     case 'arrowRight':
       return faArrowCircleRight;
+    case 'italic':
+      return faItalic;
     case 'music':
       return faMusic;
     case 'mute':
@@ -40,6 +47,8 @@ export const AwesomeIcons = icon => {
       return faRandom;
     case 'stop':
       return faStopCircle;
+    case 'volume':
+      return faVolumeUp;
     default:
       return faFileAlt;
   }

@@ -28,3 +28,12 @@
   -ms-user-select: none;
   user-select: none;
 }
+.soundTypeWriter {
+  cursor: pointer;
+}
+.soundTypewriterActive {
+  opacity: 1;
+}
+.soundTypewriterDeactive {
+  opacity: 0.5;
+}

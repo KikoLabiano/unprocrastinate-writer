@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useReducer } from 'react';
+import { useRecoilState } from 'recoil';
 
 import isNil from 'lodash/isNil';
 
@@ -12,10 +13,13 @@ import { AwesomeIcons } from '../../../../../conf/AwesomeIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WaveViewer } from './_components/WaveViewer';
 
+import { writerSoundState } from '../../../../../store';
 import { musicPlayerReducer } from './_functions/Reducers/musicPlayerReducer';
 
 const MusicPlayer = () => {
   const audioRef = useRef();
+
+  const [writerSoundOptions, setWriterSoundOptions] = useRecoilState(writerSoundState);
 
   const [musicPlayerState, musicPlayerDispatcher] = useReducer(musicPlayerReducer, {
     isPlaying: false,
@@ -98,6 +102,12 @@ const MusicPlayer = () => {
 
   const onRandomSong = () => musicPlayerDispatcher({ type: 'SET_RANDOM_ACTIVE' });
 
+  const onToggleTypeWriterSoundOff = () => {
+    const inmWriterSoundOptions = { ...writerSoundOptions };
+    inmWriterSoundOptions.isSoundActive = !inmWriterSoundOptions.isSoundActive;
+    setWriterSoundOptions(inmWriterSoundOptions);
+  };
+
   const generateRandom = (min, max, excluded) => {
     var n = Math.floor(Math.random() * (max - min) + min);
     if (n >= excluded) n++;
@@ -126,6 +136,14 @@ const MusicPlayer = () => {
             styles.songInfo
           }>{`${listOfSongsData[playingSong].title} - ${listOfSongsData[playingSong].author} (${listOfSongsData[playingSong].album})`}</div>
       )}
+      <FontAwesomeIcon
+        aria-hidden={false}
+        className={`${
+          writerSoundOptions.isSoundActive ? styles.soundTypewriterActive : styles.soundTypewriterDeactive
+        } ${styles.soundTypewriter}`}
+        icon={AwesomeIcons('volume')}
+        onClick={onToggleTypeWriterSoundOff}
+      />
       <audio className="audio-element" ref={audioRef}>
         <source src={listOfSongs[playingSong]}></source>
       </audio>

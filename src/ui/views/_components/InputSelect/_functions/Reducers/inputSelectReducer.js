@@ -1,23 +1,21 @@
 export const inputSelectReducer = (state, { type, payload }) => {
   switch (type) {
     case 'SET_VALUE':
+      console.log(payload);
       return {
         ...state,
         selectValue: payload
       };
     case 'SET_FILTER':
-      console.log(
-        payload,
-        state.filteredOptions,
-        state.filteredOptions.filter(filteredOption => filteredOption.value.includes(payload))
-      );
       return {
         ...state,
-        isFiltered: payload !== '',
-        filter: payload,
+        isFiltered: payload.filter !== '',
+        filter: payload.filter,
         filteredOptions:
-          payload !== ''
-            ? [...state.filteredOptions.filter(filteredOption => filteredOption.value.includes(payload))]
+          payload.filter !== ''
+            ? payload.options.filter(filteredOption =>
+                filteredOption.value.toLowerCase().includes(payload.filter.toLowerCase())
+              )
             : state.filteredOptions
       };
     default:

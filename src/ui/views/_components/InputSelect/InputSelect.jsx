@@ -1,18 +1,24 @@
 import React, { useEffect, useReducer } from 'react';
 
+import first from 'lodash/first';
+import isEmpty from 'lodash/isEmpty';
+
+import styles from './InputSelect.module.css';
+
 import { InputText } from '../InputText';
 
 import { inputSelectReducer } from './_functions/Reducers/inputSelectReducer';
 
-const InputSelect = ({ className, filtrable = true, onChange = () => {}, hasEmptyOption = false, options, value }) => {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { value: this.props.value.value };
-
-  //   this.handleChange = this.handleChange.bind(this);
-  //   console.log(this.props.value);
-  // }
-
+const InputSelect = ({
+  className,
+  filterClassName,
+  filtrable = true,
+  onChange = () => {},
+  onFilter = () => {},
+  hasEmptyOption = false,
+  options,
+  value
+}) => {
   const [inputSelectState, inputSelectDispatcher] = useReducer(inputSelectReducer, {
     isFiltered: false,
     filteredOptions: options,
@@ -22,28 +28,36 @@ const InputSelect = ({ className, filtrable = true, onChange = () => {}, hasEmpt
 
   const { filter, filteredOptions, isFiltered, selectValue } = inputSelectState;
 
-  const handleChange = event => {
+  useEffect(() => {
+    if (isFiltered && !isEmpty(filteredOptions)) {
+      inputSelectDispatcher({ type: 'SET_VALUE', payload: first(filteredOptions).value });
+      onFilter(first(filteredOptions).value);
+    }
+  }, [isFiltered, filter]);
+
+  const onHandleChange = event => {
     inputSelectDispatcher({ type: 'SET_VALUE', payload: event.target.value });
     onChange(event);
   };
 
-  const onFilter = value => {
+  const onHandleFilter = value => {
     inputSelectDispatcher({
       type: 'SET_FILTER',
-      payload: value
+      payload: { filter: value, options }
     });
   };
 
   return (
-    <div>
+    <div className={styles.inputSelectWrapper}>
       {filtrable && (
         <InputText
-          // className={styles.fontSizeInput}
-          onChange={e => onFilter(e.target.value)}
+          className={filterClassName}
+          onChange={e => onHandleFilter(e.target.value)}
+          placeholder="Search font..."
           type="text"
           value={filter}></InputText>
       )}
-      <select className={className} onChange={handleChange} value={selectValue}>
+      <select className={className} onChange={onHandleChange} value={selectValue}>
         {hasEmptyOption ? <option value="">--Please choose an option--</option> : null}
         {!isFiltered
           ? options.map(opt => {
