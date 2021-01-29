@@ -28,7 +28,6 @@ const Gallery = ({ numberOfBackgrounds }) => {
     } else {
       inmBackgroundProperties.selectedBackground = inmBackgroundProperties.selectedBackground + 1;
     }
-    console.log(inmBackgroundProperties.selectedBackground);
     setBackground(inmBackgroundProperties);
   };
 

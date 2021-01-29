@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 import styles from './TextEditor.module.css';
 
@@ -12,11 +12,11 @@ import { fontState } from '../../../../../store';
 const TextEditor = () => {
   const [fontOptions, setFontOptions] = useRecoilState(fontState);
 
+  const getSelectElement = fontValue => fontOptions.fontFamilyList.find(font => font.value === fontValue);
+
   const onChangeFontProperty = (fontProperty, fontPropertyValue) => {
-    console.log(fontPropertyValue);
     const inmFontOptions = { ...fontOptions };
     inmFontOptions[fontProperty] = fontPropertyValue;
-    console.log(inmFontOptions);
     setFontOptions(inmFontOptions);
   };
 
@@ -44,12 +44,12 @@ const TextEditor = () => {
       </div>
       <div className={styles.optionWrapper}>
         <span>Font color:</span>
-        {/* <InputSelect
+        <InputSelect
           className={styles.fontColorSelect}
-          onChange={e => onChangeFontProperty('fontFamily', { value: e.target.value })}
+          onChange={e => onChangeFontProperty('fontFamily', getSelectElement(e.target.value))}
           options={fontOptions.fontFamilyList}
-          value={fontOptions.fontFamily}></InputSelect> */}
-        <Select options={fontOptions.fontFamilyList} />
+          value={fontOptions.fontFamily}></InputSelect>
+        {/* <Select options={fontOptions.fontFamilyList} /> */}
       </div>
     </div>
   );
