@@ -5,6 +5,7 @@ import { backgroundState } from '../../../store';
 
 import styles from './UnprocrastinateWriter.module.css';
 
+import { FileManagement } from './_components/FileManagement';
 import { Gallery } from './_components/Gallery';
 import { MusicPlayer } from './_components/MusicPlayer';
 import { SideBar } from './_components/SideBar';
@@ -24,7 +25,7 @@ const UnprocrastinateWriter = () => {
         options={[
           { id: 'background', label: 'Background', icon: 'image', top: '150', height: '100' },
           { id: 'font', label: 'Font', icon: 'font', top: '300', height: '200' },
-          { id: 'music', label: 'Music', icon: 'music', top: '550', height: '200' }
+          { id: 'music', label: 'Music', icon: 'music', top: '550', height: '300' }
         ]}>
         {[
           <Gallery numberOfBackgrounds={backgroundProperties.listOfBackgrounds.length}></Gallery>,
@@ -35,6 +36,7 @@ const UnprocrastinateWriter = () => {
       <div className={styles.container}>
         <Writer></Writer>
       </div>
+      <FileManagement></FileManagement>
     </div>
   );
 };

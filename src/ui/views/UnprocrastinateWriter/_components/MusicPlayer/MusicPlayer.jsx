@@ -30,16 +30,24 @@ const MusicPlayer = () => {
       { title: 'Prisoner', author: 'Alex Mason', album: 'Albion' },
       { title: 'Broken surfaces 2', author: 'Daniel Birch', album: 'Restless States' }
     ],
-    playingSong: 0
+    playingSong: 0,
+    volume: 0.5
   });
 
-  const { isPlaying, isRandomActive, listOfSongs, listOfSongsData, playingSong } = musicPlayerState;
+  const { isPlaying, isRandomActive, listOfSongs, listOfSongsData, playingSong, volume } = musicPlayerState;
 
   useEffect(() => {
     if (!isNil(audioRef) && !isNil(audioRef.current)) {
       audioRef.current.addEventListener('ended', onNextSong);
     }
   }, []);
+
+  useEffect(() => {
+    if (!isNil(audioRef) && !isNil(audioRef.current)) {
+      console.log({ volume });
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
 
   useEffect(() => {
     // if (!isNil(playingSong)) {
@@ -54,6 +62,11 @@ const MusicPlayer = () => {
     }
     // }
   }, [playingSong, isPlaying]);
+
+  const onChangeVolume = e => {
+    console.log(e.target.value);
+    musicPlayerDispatcher({ type: 'SET_VOLUME', payload: e.target.value / 100 });
+  };
 
   const onNextSong = () => {
     if (isRandomActive) {
@@ -118,14 +131,41 @@ const MusicPlayer = () => {
     <div className={styles.musicPlayerWrapper}>
       <div className={styles.musicPlayerView}>{/* <WaveViewer></WaveViewer> */}</div>
       <div className={styles.musicPlayerControls}>
-        <FontAwesomeIcon aria-hidden={false} icon={AwesomeIcons('previousSong')} onClick={onPreviousSong} />
-        <FontAwesomeIcon aria-hidden={false} icon={AwesomeIcons(isPlaying ? 'pause' : 'play')} onClick={onPlayMusic} />
-        <FontAwesomeIcon aria-hidden={false} icon={AwesomeIcons('nextSong')} onClick={onNextSong} />
+        <FontAwesomeIcon
+          aria-hidden={false}
+          className={styles.musicPlayerControlsButton}
+          icon={AwesomeIcons('previousSong')}
+          onClick={onPreviousSong}
+        />
+        <FontAwesomeIcon
+          aria-hidden={false}
+          className={`${isPlaying ? styles.musicPlayerControlPressed : ''} ${styles.musicPlayerControlsButton}`}
+          icon={AwesomeIcons(isPlaying ? 'pause' : 'play')}
+          onClick={onPlayMusic}
+        />
+        <FontAwesomeIcon
+          aria-hidden={false}
+          className={styles.musicPlayerControlsButton}
+          icon={AwesomeIcons('nextSong')}
+          onClick={onNextSong}
+        />
+      </div>
+      <div>
+        <input
+          className={styles.musicPlayerControlsVolume}
+          type="range"
+          min="1"
+          max="100"
+          onChange={onChangeVolume}
+          value={volume * 100}
+        />
       </div>
       <div>
         <FontAwesomeIcon
           aria-hidden={false}
-          className={isRandomActive ? styles.randomSelected : ''}
+          className={`${isRandomActive ? [styles.randomSelected, styles.musicPlayerControlPressed].join(' ') : ''} ${
+            styles.musicPlayerControlsButton
+          }`}
           icon={AwesomeIcons('random')}
           onClick={onRandomSong}
         />
@@ -139,8 +179,10 @@ const MusicPlayer = () => {
       <FontAwesomeIcon
         aria-hidden={false}
         className={`${
-          writerSoundOptions.isSoundActive ? styles.soundTypewriterActive : styles.soundTypewriterDeactive
-        } ${styles.soundTypewriter}`}
+          writerSoundOptions.isSoundActive
+            ? [styles.soundTypewriterActive, styles.musicPlayerControlPressed].join(' ')
+            : styles.soundTypewriterDeactive
+        } ${styles.soundTypewriter} ${styles.musicPlayerControlsButton}`}
         icon={AwesomeIcons('volume')}
         onClick={onToggleTypeWriterSoundOff}
       />

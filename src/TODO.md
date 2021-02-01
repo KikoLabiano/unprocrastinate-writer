@@ -1,21 +1,27 @@
 #Audio
-_ Volume
+_ Volume - Done
 _ Waves
 _ Add more songs
 _ Progress bar
+_ Link to author
+_ Spotify api?
 #Background
 _ Gallery
-_ Add more backgrounds
+_ Add more backgrounds - Done
 _ Info author
 _ Toggle glass effect
 _ Plane background color
-#Fonts editor
+#Fonts editor - Done
 #Save/Load text
 #Absolute paths
 #Sounds (typewriter) -> Array of sounds?
 #Refactor
 #Tooltips
 #Button effects
+_ Neumorphism?
+#Keyboard shortcuts
+
+
 
 
 default -> https://pixabay.com/es/users/freecreativestuff-6346290/

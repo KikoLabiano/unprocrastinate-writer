@@ -1,0 +1,18 @@
+.fileManagementWrapper {
+  position: absolute;
+  right: 12rem;
+  top: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.fileManagementButton {
+  color: white;
+  font-size: 50pt;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.5s;
+}
+.fileManagementButton:hover {
+  opacity: 1;
+}

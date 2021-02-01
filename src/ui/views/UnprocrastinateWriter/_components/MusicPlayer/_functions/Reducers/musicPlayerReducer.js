@@ -15,6 +15,11 @@ export const musicPlayerReducer = (state, { type, payload }) => {
         ...state,
         isRandomActive: !state.isRandomActive
       };
+    case 'SET_VOLUME':
+      return {
+        ...state,
+        volume: payload
+      };
     default:
       return state;
   }

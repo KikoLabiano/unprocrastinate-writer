@@ -11,7 +11,9 @@ function createWindow() {
     height: 1280,
     // frame: false,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      enableRemoteModule: true
+      // preload: __dirname + '/../src/preload.js'
     }
   });
 

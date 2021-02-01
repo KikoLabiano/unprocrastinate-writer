@@ -10,6 +10,7 @@ import {
   faPauseCircle,
   faPlayCircle,
   faRandom,
+  faSave,
   faStepBackward,
   faStepForward,
   faStopCircle,
@@ -45,6 +46,8 @@ export const AwesomeIcons = icon => {
       return faStepBackward;
     case 'random':
       return faRandom;
+    case 'save':
+      return faSave;
     case 'stop':
       return faStopCircle;
     case 'volume':
