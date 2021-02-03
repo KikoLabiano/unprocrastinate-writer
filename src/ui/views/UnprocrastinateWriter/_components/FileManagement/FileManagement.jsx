@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import isNil from 'lodash/isNil';
 // import electron from 'electron';
 
@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Toast } from '../../../_components/Toast';
 
 const FileManagement = () => {
-  const writerText = useRecoilValue(writerTextState);
+  const [writerText, setWriterText] = useRecoilState(writerTextState);
   const toastRef = useRef();
 
   const onCopyToClipboard = () => {
@@ -32,27 +32,39 @@ const FileManagement = () => {
     }
   };
 
+  const onOpenFile = () => {
+    const electron = window.require('electron');
+    const fs = window.require('fs');
+    const dialog = electron.remote.dialog;
+    dialog
+      .showOpenDialog({
+        properties: ['openFile', 'multiSelections']
+      })
+      .then(result => {
+        fs.readFile(result.filePaths[0], 'utf-8', (err, data) => {
+          if (err) {
+            console.error('An error ocurred reading the file :' + err.message);
+            return;
+          }
+          const inmWriterText = { ...writerText };
+          inmWriterText.text = data;
+          inmWriterText.fileName = result.filePaths[0];
+          setWriterText(inmWriterText);
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
   const onSaveFile = () => {
     const electron = window.require('electron');
     const fs = window.require('fs');
-    console.log(electron);
-    console.log(electron.app);
-
-    // fs.dir(electron.remote.app.getPath('appData') + '\\sticky-notes\\');
-    // //Write in file
-    // fs.write(
-    //   electron.remote.app.getPath('appData') +
-    //     '\\sticky-notes\\sticky' +
-    //     electron.remote.getCurrentWindow().id +
-    //     '.txt',
-    //   'This is a test'
-    // );
     const dialog = electron.remote.dialog;
     dialog
       .showSaveDialog({
         title: 'Select the File Path to save',
         defaultPath: path.join(__dirname, '../assets/sample.txt'),
-        // defaultPath: path.join(__dirname, '../assets/'),
         buttonLabel: 'Save',
         // Restricting the user to only Text Files.
         filters: [
@@ -69,9 +81,11 @@ const FileManagement = () => {
         if (!file.canceled) {
           console.log(file.filePath.toString());
           // Creating and Writing to the sample.txt file
-          fs.writeFile(file.filePath.toString(), 'This is a Sample File', function (err) {
+          fs.writeFile(file.filePath.toString(), writerText.text, function (err) {
             if (err) throw err;
-            console.log('Saved!');
+            const inmWriterText = { ...writerText };
+            inmWriterText.fileName = file.filePath.toString();
+            setWriterText(inmWriterText);
           });
         }
       })
@@ -82,6 +96,12 @@ const FileManagement = () => {
 
   return (
     <div className={styles.fileManagementWrapper}>
+      <FontAwesomeIcon
+        aria-hidden={false}
+        className={styles.fileManagementButton}
+        icon={AwesomeIcons('folder')}
+        onClick={onOpenFile}
+      />
       <FontAwesomeIcon
         aria-hidden={false}
         className={styles.fileManagementButton}

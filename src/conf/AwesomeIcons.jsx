@@ -4,6 +4,7 @@ import {
   faBold,
   faClipboardList,
   faFileAlt,
+  faFolderOpen,
   faFont,
   faImage,
   faItalic,
@@ -29,6 +30,8 @@ export const AwesomeIcons = icon => {
       return faBold;
     case 'copy':
       return faClipboardList;
+    case 'folder':
+      return faFolderOpen;
     case 'font':
       return faFont;
     case 'image':

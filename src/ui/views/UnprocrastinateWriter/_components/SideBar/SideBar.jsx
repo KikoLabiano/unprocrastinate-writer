@@ -10,6 +10,7 @@ const SideBar = ({ children, options = [] }) => {
     <div
       className={styles.sideNavElement}
       id={option.id}
+      key={option.id}
       style={{ top: `${option.top}px`, height: `${option.height}px` }}>
       <FontAwesomeIcon aria-hidden={false} className={styles.icon} icon={AwesomeIcons(option.icon)} />
       {children[i]}

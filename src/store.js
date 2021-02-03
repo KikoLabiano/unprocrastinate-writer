@@ -103,6 +103,7 @@ export const writerSoundState = atom({
 export const writerTextState = atom({
   key: 'writerText',
   default: {
-    text: ''
+    text: '',
+    fileName: ''
   }
 });

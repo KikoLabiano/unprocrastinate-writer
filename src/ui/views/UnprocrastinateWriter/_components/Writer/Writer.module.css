@@ -19,6 +19,7 @@
   vertical-align: top;
   scrollbar-width: thin;
   scrollbar-color: black white;
+  cursor: auto;
 }
 
 .writerArea::placeholder {
@@ -39,9 +40,8 @@
 }
 
 .writerArea::-webkit-scrollbar-thumb {
-  background: rgb(192, 192, 192);
+  background: rgb(255, 255, 255);
 }
 
 .writerArea::-webkit-scrollbar-thumb:hover {
-  background: rgb(192, 192, 192);
 }

@@ -1,6 +1,6 @@
 .fileManagementWrapper {
   position: absolute;
-  right: 12rem;
+  right: 6rem;
   top: 4rem;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,9 @@
   cursor: pointer;
   opacity: 0.7;
   transition: 0.5s;
+  margin-top: 4rem;
 }
 .fileManagementButton:hover {
+  transform: scale(1.5, 1.5);
   opacity: 1;
 }

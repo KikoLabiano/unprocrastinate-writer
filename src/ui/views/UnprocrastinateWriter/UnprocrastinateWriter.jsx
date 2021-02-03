@@ -6,6 +6,7 @@ import { backgroundState } from '../../../store';
 import styles from './UnprocrastinateWriter.module.css';
 
 import { FileManagement } from './_components/FileManagement';
+import { FileTitle } from './_components/FileTitle';
 import { Gallery } from './_components/Gallery';
 import { MusicPlayer } from './_components/MusicPlayer';
 import { SideBar } from './_components/SideBar';
@@ -34,6 +35,7 @@ const UnprocrastinateWriter = () => {
         ]}
       </SideBar>
       <div className={styles.container}>
+        <FileTitle></FileTitle>
         <Writer></Writer>
       </div>
       <FileManagement></FileManagement>
