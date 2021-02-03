@@ -2,6 +2,7 @@ import {
   faArrowCircleLeft,
   faArrowCircleRight,
   faBold,
+  faClipboardList,
   faFileAlt,
   faFont,
   faImage,
@@ -20,16 +21,18 @@ import {
 
 export const AwesomeIcons = icon => {
   switch (icon) {
-    case 'bold':
-      return faBold;
-    case 'font':
-      return faFont;
-    case 'image':
-      return faImage;
     case 'arrowLeft':
       return faArrowCircleLeft;
     case 'arrowRight':
       return faArrowCircleRight;
+    case 'bold':
+      return faBold;
+    case 'copy':
+      return faClipboardList;
+    case 'font':
+      return faFont;
+    case 'image':
+      return faImage;
     case 'italic':
       return faItalic;
     case 'music':

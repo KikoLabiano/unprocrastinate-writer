@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useRecoilValue } from 'recoil';
+import isNil from 'lodash/isNil';
 // import electron from 'electron';
 
 // import fs from 'fs';
@@ -6,10 +8,30 @@ import path from 'path';
 
 import styles from './FileManagement.module.css';
 
+import { writerTextState } from '../../../../../store';
+
 import { AwesomeIcons } from '../../../../../conf/AwesomeIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Toast } from '../../../_components/Toast';
 
 const FileManagement = () => {
+  const writerText = useRecoilValue(writerTextState);
+  const toastRef = useRef();
+
+  const onCopyToClipboard = () => {
+    let text = writerText.text;
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {})
+      .catch(err => {
+        console.error('Error in copying text: ', err);
+      });
+    console.log(toastRef);
+    if (!isNil(toastRef.current)) {
+      toastRef.current.show();
+    }
+  };
+
   const onSaveFile = () => {
     const electron = window.require('electron');
     const fs = window.require('fs');
@@ -66,6 +88,13 @@ const FileManagement = () => {
         icon={AwesomeIcons('save')}
         onClick={onSaveFile}
       />
+      <FontAwesomeIcon
+        aria-hidden={false}
+        className={styles.fileManagementButton}
+        icon={AwesomeIcons('copy')}
+        onClick={onCopyToClipboard}
+      />
+      <Toast message="Text copied!" inputRef={toastRef} />
     </div>
   );
 };

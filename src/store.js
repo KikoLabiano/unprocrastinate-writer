@@ -99,3 +99,10 @@ export const writerSoundState = atom({
     isSoundActive: false
   }
 });
+
+export const writerTextState = atom({
+  key: 'writerText',
+  default: {
+    text: ''
+  }
+});

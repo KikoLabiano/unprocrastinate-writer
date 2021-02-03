@@ -1,5 +1,5 @@
 import React, { useReducer, useRef } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import isNil from 'lodash/isNil';
 
@@ -9,13 +9,22 @@ import typeWriterBell from '../../../../assets/sounds/effects/typeWriterBell.mp3
 
 import styles from './Writer.module.css';
 
-import { fontState, writerSoundState } from '../../../../../store';
+import { fontState, writerSoundState, writerTextState } from '../../../../../store';
 
 const Writer = () => {
   const fontOptions = useRecoilValue(fontState);
   const writerSoundOptions = useRecoilValue(writerSoundState);
+  const [writerText, setWriterText] = useRecoilState(writerTextState);
+
   const audioRef = useRef();
   // const writerFont = fontOptions.fontFamilyList.filter(font => font.value === fontOptions.fontFamily.value) ;
+
+  const onChange = value => {
+    console.log(value);
+    const inmWriterText = { ...writerText };
+    inmWriterText.text = value;
+    setWriterText(inmWriterText);
+  };
 
   const onKeyDown = e => {
     if (writerSoundOptions.isSoundActive) {
@@ -41,6 +50,7 @@ const Writer = () => {
     <>
       <textarea
         className={styles.writerArea}
+        onChange={e => onChange(e.target.value)}
         onKeyDown={e => onKeyDown(e)}
         placeholder="Start writing..."
         rows={30}
@@ -50,7 +60,8 @@ const Writer = () => {
           fontSize: `${fontOptions.fontSize}pt`,
           fontStyle: fontOptions.fontStyle,
           fontWeight: fontOptions.fontWeight
-        }}></textarea>
+        }}
+        value={writerText.text}></textarea>
       <audio className="audio-element" ref={audioRef}>
         <source src={typeWriter2}></source>
       </audio>
