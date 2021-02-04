@@ -1,8 +1,8 @@
 .background {
   background-attachment: fixed;
   background-size: cover;
-  display: grid;
-  height: 100vh;
+  display: flex;
+  height: 90%;
   transition: 0.3s;
 }
 .container {
@@ -14,7 +14,7 @@
   z-index: 1;
   background: inherit;
   overflow: hidden;
-  margin: 8rem 0 0 10rem;
+  margin: 4rem 4rem 6rem 10rem;
 }
 
 .container:before {

@@ -1,7 +1,7 @@
 .fileManagementWrapper {
-  position: absolute;
-  right: 6rem;
-  top: 4rem;
+  /* position: absolute; */
+  /* right: 6rem; */
+  /* top: 4rem; */
   display: flex;
   flex-direction: column;
 }

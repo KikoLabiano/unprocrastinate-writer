@@ -20,9 +20,7 @@ _ Plane background color
 #Button effects
 _ Neumorphism?
 #Keyboard shortcuts
-
-
-
+#Responsive
 
 default -> https://pixabay.com/es/users/freecreativestuff-6346290/
 snowHills -> https://pixabay.com/es/users/susnpics-10235783/
@@ -45,4 +43,3 @@ stars -> https://pixabay.com/es/users/free-photos-242387/
 milkyWay -> https://pixabay.com/es/users/free-photos-242387/
 stars2 -> https://pixabay.com/es/users/free-photos-242387/
 stars3 -> https://pixabay.com/es/users/theartofsounds2001-4501413/
-

@@ -38,7 +38,9 @@ const UnprocrastinateWriter = () => {
         <FileTitle></FileTitle>
         <Writer></Writer>
       </div>
-      <FileManagement></FileManagement>
+      <div>
+        <FileManagement></FileManagement>
+      </div>
     </div>
   );
 };
