@@ -13,6 +13,7 @@ import { writerTextState } from '../../../../../store';
 import { AwesomeIcons } from '../../../../../conf/AwesomeIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Toast } from '../../../_components/Toast';
+import { Tooltip } from '../../../../views/_components/Tooltip';
 
 const FileManagement = () => {
   const [writerText, setWriterText] = useRecoilState(writerTextState);
@@ -57,7 +58,7 @@ const FileManagement = () => {
       });
   };
 
-  const onSaveFile = () => {
+  const onSaveAsFile = () => {
     const electron = window.require('electron');
     const fs = window.require('fs');
     const dialog = electron.remote.dialog;
@@ -94,26 +95,50 @@ const FileManagement = () => {
       });
   };
 
+  const onSaveFile = () => {
+    const fs = window.require('fs');
+    fs.writeFile(writerText.fileName.toString(), writerText.text, function (err) {
+      if (err) throw err;
+      const inmWriterText = { ...writerText };
+      inmWriterText.fileName = writerText.fileName.toString();
+      setWriterText(inmWriterText);
+    });
+  };
+
   return (
     <div className={styles.fileManagementWrapper}>
-      <FontAwesomeIcon
-        aria-hidden={false}
-        className={styles.fileManagementButton}
-        icon={AwesomeIcons('folder')}
-        onClick={onOpenFile}
-      />
-      <FontAwesomeIcon
-        aria-hidden={false}
-        className={styles.fileManagementButton}
-        icon={AwesomeIcons('save')}
-        onClick={onSaveFile}
-      />
-      <FontAwesomeIcon
-        aria-hidden={false}
-        className={styles.fileManagementButton}
-        icon={AwesomeIcons('copy')}
-        onClick={onCopyToClipboard}
-      />
+      <Tooltip content="Open file" direction="bottom">
+        <FontAwesomeIcon
+          aria-hidden={false}
+          className={styles.fileManagementButton}
+          icon={AwesomeIcons('folder')}
+          onClick={onOpenFile}
+        />
+      </Tooltip>
+      <Tooltip content="Save file" direction="bottom">
+        <FontAwesomeIcon
+          aria-hidden={false}
+          className={styles.fileManagementButton}
+          icon={AwesomeIcons('save')}
+          onClick={onSaveFile}
+        />
+      </Tooltip>
+      <Tooltip content="Save file as..." direction="bottom">
+        <FontAwesomeIcon
+          aria-hidden={false}
+          className={styles.fileManagementButton}
+          icon={AwesomeIcons('saveAs')}
+          onClick={onSaveAsFile}
+        />
+      </Tooltip>
+      <Tooltip content="Copy to clipboard" direction="bottom">
+        <FontAwesomeIcon
+          aria-hidden={false}
+          className={styles.fileManagementButton}
+          icon={AwesomeIcons('copy')}
+          onClick={onCopyToClipboard}
+        />
+      </Tooltip>
       <Toast message="Text copied!" inputRef={toastRef} />
     </div>
   );

@@ -3,6 +3,7 @@ import {
   faArrowCircleRight,
   faBold,
   faClipboardList,
+  faEdit,
   faFileAlt,
   faFolderOpen,
   faFont,
@@ -10,6 +11,7 @@ import {
   faItalic,
   faMusic,
   faPauseCircle,
+  faPenSquare,
   faPlayCircle,
   faRandom,
   faSave,
@@ -54,6 +56,8 @@ export const AwesomeIcons = icon => {
       return faRandom;
     case 'save':
       return faSave;
+    case 'saveAs':
+      return faPenSquare;
     case 'stop':
       return faStopCircle;
     case 'volume':
