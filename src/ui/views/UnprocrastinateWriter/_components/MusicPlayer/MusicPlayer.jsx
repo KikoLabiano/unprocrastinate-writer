@@ -18,6 +18,7 @@ import { musicPlayerReducer } from './_functions/Reducers/musicPlayerReducer';
 
 const MusicPlayer = () => {
   const audioRef = useRef();
+  const progressBarRef = useRef();
 
   const [writerSoundOptions, setWriterSoundOptions] = useRecoilState(writerSoundState);
 
@@ -31,10 +32,19 @@ const MusicPlayer = () => {
       { title: 'Broken surfaces 2', author: 'Daniel Birch', album: 'Restless States' }
     ],
     playingSong: 0,
+    progressBarValue: 0,
     volume: 0.5
   });
 
-  const { isPlaying, isRandomActive, listOfSongs, listOfSongsData, playingSong, volume } = musicPlayerState;
+  const {
+    isPlaying,
+    isRandomActive,
+    listOfSongs,
+    listOfSongsData,
+    playingSong,
+    progressBarValue,
+    volume
+  } = musicPlayerState;
 
   useEffect(() => {
     if (!isNil(audioRef) && !isNil(audioRef.current)) {
@@ -62,6 +72,14 @@ const MusicPlayer = () => {
     }
     // }
   }, [playingSong, isPlaying]);
+
+  const onChangeSongProgress = e => {
+    console.log({ e });
+    var percent = e.nativeEvent.offsetX / progressBarRef.current.offsetWidth;
+    console.log(percent, e.nativeEvent.offsetX, progressBarRef.current.offsetWidth, audioRef.current.duration);
+    audioRef.current.currentTime = percent * audioRef.current.duration;
+    musicPlayerDispatcher({ type: 'SET_PROGRESS_BAR', payload: percent * 100 });
+  };
 
   const onChangeVolume = e => {
     console.log(e.target.value);
@@ -121,6 +139,13 @@ const MusicPlayer = () => {
     setWriterSoundOptions(inmWriterSoundOptions);
   };
 
+  const onUpdateSongProgress = e => {
+    if (isPlaying) {
+      console.log(e.target.currentTime);
+      musicPlayerDispatcher({ type: 'SET_PROGRESS_BAR', payload: (e.target.currentTime * 100) / e.target.duration });
+    }
+  };
+
   const generateRandom = (min, max, excluded) => {
     var n = Math.floor(Math.random() * (max - min) + min);
     if (n >= excluded) n++;
@@ -149,6 +174,14 @@ const MusicPlayer = () => {
           icon={AwesomeIcons('nextSong')}
           onClick={onNextSong}
         />
+      </div>
+      <div>
+        <progress
+          min="0"
+          max="100"
+          onClick={onChangeSongProgress}
+          ref={progressBarRef}
+          value={progressBarValue}></progress>
       </div>
       <div>
         <input
@@ -186,7 +219,7 @@ const MusicPlayer = () => {
         icon={AwesomeIcons('volume')}
         onClick={onToggleTypeWriterSoundOff}
       />
-      <audio className="audio-element" ref={audioRef}>
+      <audio className="audio-element" ref={audioRef} onTimeUpdate={onUpdateSongProgress}>
         <source src={listOfSongs[playingSong]}></source>
       </audio>
     </div>

@@ -86,6 +86,7 @@ const FileManagement = () => {
             if (err) throw err;
             const inmWriterText = { ...writerText };
             inmWriterText.fileName = file.filePath.toString();
+            inmWriterText.hasUnsavedChanges = false;
             setWriterText(inmWriterText);
           });
         }
@@ -101,6 +102,7 @@ const FileManagement = () => {
       if (err) throw err;
       const inmWriterText = { ...writerText };
       inmWriterText.fileName = writerText.fileName.toString();
+      inmWriterText.hasUnsavedChanges = false;
       setWriterText(inmWriterText);
     });
   };

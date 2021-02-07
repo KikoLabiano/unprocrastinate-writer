@@ -10,6 +10,12 @@ export const musicPlayerReducer = (state, { type, payload }) => {
         ...state,
         playingSong: payload
       };
+    case 'SET_PROGRESS_BAR':
+      console.log({ payload });
+      return {
+        ...state,
+        progressBarValue: payload
+      };
     case 'SET_RANDOM_ACTIVE':
       return {
         ...state,

@@ -23,6 +23,9 @@ const Writer = () => {
     console.log(value);
     const inmWriterText = { ...writerText };
     inmWriterText.text = value;
+    if (inmWriterText.fileName !== '') {
+      inmWriterText.hasUnsavedChanges = true;
+    }
     setWriterText(inmWriterText);
   };
 

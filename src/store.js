@@ -104,6 +104,7 @@ export const writerTextState = atom({
   key: 'writerText',
   default: {
     text: '',
-    fileName: ''
+    fileName: '',
+    hasUnsavedChanges: false
   }
 });
