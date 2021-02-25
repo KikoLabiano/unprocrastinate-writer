@@ -16,7 +16,7 @@ function createWindow() {
       // preload: __dirname + '/../src/preload.js'
     }
   });
-
+  console.log(__dirname);
   mainWindow.loadURL(
     process.env.ELECTRON_START_URL ||
       url.format({
