@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import isNil from 'lodash/isNil';
@@ -11,10 +11,15 @@ import styles from './Writer.module.scss';
 
 import { fontState, writerSoundState, writerTextState } from 'store';
 
+import { languagesAtom, messagesAtom } from 'ui/tools/Atoms/MessagesAtoms';
+
 const Writer = () => {
   const fontOptions = useRecoilValue(fontState);
   const writerSoundOptions = useRecoilValue(writerSoundState);
   const [writerText, setWriterText] = useRecoilState(writerTextState);
+
+  const language = useRecoilValue(languagesAtom);
+  const messages = useRecoilValue(messagesAtom);
 
   const audioRef = useRef();
   // const writerFont = fontOptions.fontFamilyList.filter(font => font.value === fontOptions.fontFamily.value) ;
@@ -55,7 +60,7 @@ const Writer = () => {
         className={styles.writerArea}
         onChange={e => onChange(e.target.value)}
         onKeyDown={e => onKeyDown(e)}
-        placeholder="Start writing..."
+        placeholder={messages[language]['writerPlaceholder']}
         rows={30}
         style={{
           color: fontOptions.fontColor,

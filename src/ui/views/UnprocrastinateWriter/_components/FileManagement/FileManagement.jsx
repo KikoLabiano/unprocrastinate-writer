@@ -1,6 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import React, { useRef, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import isNil from 'lodash/isNil';
+
+import spanishLogo from 'ui/assets/img/spanish.png';
+import englishLogo from 'ui/assets/img/english.png';
 
 import styles from './FileManagement.module.scss';
 
@@ -12,8 +15,14 @@ import { InputText } from 'ui/views/_components/InputText';
 import { Toast } from 'ui/views/_components/Toast';
 import { Tooltip } from 'ui/views/_components/Tooltip';
 
+import { languagesAtom, messagesAtom } from 'ui/tools/Atoms/MessagesAtoms';
+
 const FileManagement = () => {
   const [writerText, setWriterText] = useRecoilState(writerTextState);
+
+  const [language, setLanguage] = useRecoilState(languagesAtom);
+  const messages = useRecoilValue(messagesAtom);
+
   const [fullScreen, setFullScreen] = useState(false);
   const toastRef = useRef();
 
@@ -157,7 +166,25 @@ const FileManagement = () => {
 
   return (
     <div className={styles.fileManagementWrapper}>
-      <Tooltip content="Open file" direction="bottom">
+      <div className={styles.languagesWrapper}>
+        <Tooltip content={messages[language]['english']} direction="bottom">
+          <img
+            alt={messages[language]['english']}
+            className={`${styles.languageLogo} ${language === 'en' ? styles.languageActive : ''}`}
+            onClick={() => setLanguage('en')}
+            src={englishLogo}
+          />
+        </Tooltip>
+        <Tooltip content={messages[language]['spanish']} direction="bottom">
+          <img
+            alt={messages[language]['spanish']}
+            className={`${styles.languageLogo} ${language === 'es' ? styles.languageActive : ''}`}
+            onClick={() => setLanguage('es')}
+            src={spanishLogo}
+          />
+        </Tooltip>
+      </div>
+      <Tooltip content={messages[language]['openFile']} direction="bottom">
         <FontAwesomeIcon
           aria-hidden={false}
           className={styles.fileManagementButton}
@@ -165,7 +192,7 @@ const FileManagement = () => {
           onClick={onOpenFile}
         />
       </Tooltip>
-      <Tooltip content="Save file" direction="bottom">
+      <Tooltip content={messages[language]['saveFile']} direction="bottom">
         <FontAwesomeIcon
           aria-hidden={false}
           className={styles.fileManagementButton}
@@ -181,7 +208,7 @@ const FileManagement = () => {
           onClick={onSaveAsFile}
         />
       </Tooltip> */}
-      <Tooltip content="Copy to clipboard" direction="bottom">
+      <Tooltip content={messages[language]['copyToClipboard']} direction="bottom">
         <FontAwesomeIcon
           aria-hidden={false}
           className={styles.fileManagementButton}
@@ -189,7 +216,7 @@ const FileManagement = () => {
           onClick={onCopyToClipboard}
         />
       </Tooltip>
-      <Tooltip content={!fullScreen ? 'Full screen' : 'Restore'} direction="bottom">
+      <Tooltip content={messages[language][!fullScreen ? 'fullScreen' : 'restore']} direction="bottom">
         <FontAwesomeIcon
           aria-hidden={false}
           className={styles.fileManagementButton}
@@ -200,7 +227,7 @@ const FileManagement = () => {
       <InputText
         className={styles.fileName}
         onChange={e => onFileNameChange(e.target.value)}
-        placeholder="file name"
+        placeholder={messages[language]['fileName']}
         type="text"
         value={writerText.fileName}></InputText>
       <Toast message="Text copied!" inputRef={toastRef} />

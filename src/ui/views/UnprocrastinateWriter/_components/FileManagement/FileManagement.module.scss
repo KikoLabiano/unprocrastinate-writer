@@ -4,6 +4,20 @@
   /* top: 4rem; */
   display: flex;
   flex-direction: column;
+
+  .languagesWrapper {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    .languageLogo {
+      cursor: pointer;
+      border-radius: 50%;
+      border: 1px solid white;
+    }
+    .languageActive {
+      box-shadow: 0px 0px 1px 2px #fff;
+    }
+  }
 }
 
 .fileName {
