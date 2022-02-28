@@ -3,17 +3,17 @@ import { useRecoilState } from 'recoil';
 
 import isNil from 'lodash/isNil';
 
-import styles from './MusicPlayer.module.css';
+import styles from './MusicPlayer.module.scss';
 
-import AlexMasonAttempts from '../../../../assets/sounds/music/AlexMasonAttempts.mp3';
-import AlexMasonPrisoner from '../../../../assets/sounds/music/AlexMasonPrisoner.mp3';
-import DanielBirchBrokenSurfaces2 from '../../../../assets/sounds/music/DanielBirchBrokenSurfaces2.mp3';
+import AlexMasonAttempts from 'ui/assets/sounds/music/AlexMasonAttempts.mp3';
+import AlexMasonPrisoner from 'ui/assets/sounds/music/AlexMasonPrisoner.mp3';
+import DanielBirchBrokenSurfaces2 from 'ui/assets/sounds/music/DanielBirchBrokenSurfaces2.mp3';
 
-import { AwesomeIcons } from '../../../../../conf/AwesomeIcons';
+import { AwesomeIcons } from 'conf/AwesomeIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WaveViewer } from './_components/WaveViewer';
 
-import { writerSoundState } from '../../../../../store';
+import { writerSoundState } from 'store';
 import { musicPlayerReducer } from './_functions/Reducers/musicPlayerReducer';
 
 const MusicPlayer = () => {
@@ -36,15 +36,8 @@ const MusicPlayer = () => {
     volume: 0.5
   });
 
-  const {
-    isPlaying,
-    isRandomActive,
-    listOfSongs,
-    listOfSongsData,
-    playingSong,
-    progressBarValue,
-    volume
-  } = musicPlayerState;
+  const { isPlaying, isRandomActive, listOfSongs, listOfSongsData, playingSong, progressBarValue, volume } =
+    musicPlayerState;
 
   useEffect(() => {
     if (!isNil(audioRef) && !isNil(audioRef.current)) {
@@ -67,16 +60,15 @@ const MusicPlayer = () => {
 
       console.log(audioRef.current.currentSrc);
       if (isPlaying) {
+        audioRef.current.currentTime = 0;
         audioRef.current.play();
       }
     }
     // }
-  }, [playingSong, isPlaying]);
+  }, [playingSong]);
 
   const onChangeSongProgress = e => {
-    console.log({ e });
     var percent = e.nativeEvent.offsetX / progressBarRef.current.offsetWidth;
-    console.log(percent, e.nativeEvent.offsetX, progressBarRef.current.offsetWidth, audioRef.current.duration);
     audioRef.current.currentTime = percent * audioRef.current.duration;
     musicPlayerDispatcher({ type: 'SET_PROGRESS_BAR', payload: percent * 100 });
   };
@@ -106,8 +98,10 @@ const MusicPlayer = () => {
   const onPlayMusic = () => {
     if (!isNil(audioRef) && !isNil(audioRef.current)) {
       if (!isPlaying) {
+        console.log('PLAY', audioRef.current.currentTime);
         audioRef.current.play();
       } else {
+        console.log('PAUSE', audioRef.current.currentTime);
         audioRef.current.pause();
       }
       musicPlayerDispatcher({ type: 'SET_IS_PLAYING', payload: !isPlaying });
@@ -140,9 +134,14 @@ const MusicPlayer = () => {
   };
 
   const onUpdateSongProgress = e => {
-    if (isPlaying) {
-      console.log(e.target.currentTime);
-      musicPlayerDispatcher({ type: 'SET_PROGRESS_BAR', payload: (e.target.currentTime * 100) / e.target.duration });
+    if (!isNil(audioRef) && !isNil(audioRef.current)) {
+      console.log(isPlaying, audioRef.current.currentTime);
+      if (isPlaying) {
+        musicPlayerDispatcher({
+          type: 'SET_PROGRESS_BAR',
+          payload: (audioRef.current.currentTime * 100) / audioRef.current.duration
+        });
+      }
     }
   };
 

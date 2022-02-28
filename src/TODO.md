@@ -2,7 +2,7 @@
 _ Volume - Done
 _ Waves
 _ Add more songs
-_ Progress bar
+_ Progress bar - Done
 _ Link to author
 _ Spotify api?
 #Background
@@ -11,8 +11,9 @@ _ Add more backgrounds - Done
 _ Info author
 _ Toggle glass effect
 _ Plane background color
+_ Background fixed (when you reduce font size the background also reduces)
 #Fonts editor - Done
-#Save/Load text
+#Save/Load text - Done
 #Absolute paths
 #Sounds (typewriter) -> Array of sounds?
 #Refactor

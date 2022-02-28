@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import styles from './Toast.module.css';
+import styles from './Toast.module.scss';
 
 const Toast = ({ message = '', inputRef }) => {
   console.log(inputRef);

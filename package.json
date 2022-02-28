@@ -4,45 +4,29 @@
   "private": false,
   "main": "src/start.js",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@fortawesome/free-solid-svg-icons": "^5.15.2",
-    "@fortawesome/react-fontawesome": "^0.1.14",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "electron": "^11.2.1",
-    "eslint-plugin-prettier": "^3.3.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "eslint-plugin-prettier": "^3.4.1",
     "foreman": "^3.0.1",
-    "lodash": "^4.17.20",
-    "node-sass": "^5.0.0",
-    "prettier": "^2.2.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
-    "react-select": "^4.0.2",
-    "recoil": "^0.1.2",
+    "lodash": "4.17.21",
+    "node-sass": "5.0.0",
+    "prettier": "2.4.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "5.0.0",
+    "react-select": "5.2.2",
+    "recoil": "^0.6.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "nf start -p 3001",
+    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "electron": "electron .",
-    "electron-start": "node src/start-react",
-    "react-start": "react-scripts start",
-    "pack": "build --dir",
-    "dist": "npm run build && build",
-    "postinstall": "install-app-deps"
-  },
-  "build": {
-    "appId": "com.electron.electron-with-create-react-app",
-    "win": {
-      "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
-    },
-    "directories": {
-      "buildResources": "public"
-    }
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -63,7 +47,8 @@
     ]
   },
   "devDependencies": {
-    "electron-builder": "^22.9.1",
+    "electron-builder": "^22.13.1",
+    "electron-devtools-installer": "^3.2.0",
     "eslint-config-prettier": "^7.2.0"
   }
 }

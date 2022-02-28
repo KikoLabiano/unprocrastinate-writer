@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 
 import { backgroundState } from '../../../store';
 
-import styles from './UnprocrastinateWriter.module.css';
+import styles from './UnprocrastinateWriter.module.scss';
 
 import { FileManagement } from './_components/FileManagement';
 import { FileTitle } from './_components/FileTitle';

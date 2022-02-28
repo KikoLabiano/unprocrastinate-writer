@@ -3,6 +3,7 @@ import {
   faArrowCircleRight,
   faBold,
   faClipboardList,
+  faDesktop,
   faEdit,
   faExclamationCircle,
   faFileAlt,
@@ -20,7 +21,8 @@ import {
   faStepForward,
   faStopCircle,
   faVolumeMute,
-  faVolumeUp
+  faVolumeUp,
+  faWindowRestore
 } from '@fortawesome/free-solid-svg-icons';
 
 export const AwesomeIcons = icon => {
@@ -65,6 +67,10 @@ export const AwesomeIcons = icon => {
       return faStopCircle;
     case 'volume':
       return faVolumeUp;
+    case 'desktop':
+      return faDesktop;
+    case 'minimize':
+      return faWindowRestore;
     default:
       return faFileAlt;
   }

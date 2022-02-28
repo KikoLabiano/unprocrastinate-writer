@@ -1,11 +1,11 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
 
-import styles from './Gallery.module.css';
+import styles from './Gallery.module.scss';
 
-import { backgroundState } from '../../../../../store';
+import { backgroundState } from 'store';
 
-import { AwesomeIcons } from '../../../../../conf/AwesomeIcons';
+import { AwesomeIcons } from 'conf/AwesomeIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Gallery = ({ numberOfBackgrounds }) => {

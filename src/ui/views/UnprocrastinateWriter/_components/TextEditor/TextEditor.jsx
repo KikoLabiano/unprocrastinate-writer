@@ -1,14 +1,14 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
 
-import styles from './TextEditor.module.css';
+import styles from './TextEditor.module.scss';
 
-import { AwesomeIcons } from '../../../../../conf/AwesomeIcons';
+import { AwesomeIcons } from 'conf/AwesomeIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { InputSelect } from '../../../../views/_components/InputSelect';
-import { InputText } from '../../../../views/_components/InputText';
+import { InputSelect } from 'ui/views/_components/InputSelect';
+import { InputText } from 'ui/views/_components/InputText';
 
-import { fontState } from '../../../../../store';
+import { fontState } from 'store';
 
 const TextEditor = () => {
   const [fontOptions, setFontOptions] = useRecoilState(fontState);

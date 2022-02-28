@@ -3,7 +3,7 @@ import React, { useEffect, useReducer } from 'react';
 import first from 'lodash/first';
 import isEmpty from 'lodash/isEmpty';
 
-import styles from './InputSelect.module.css';
+import styles from './InputSelect.module.scss';
 
 import { InputText } from '../InputText';
 

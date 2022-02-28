@@ -11,7 +11,6 @@ export const musicPlayerReducer = (state, { type, payload }) => {
         playingSong: payload
       };
     case 'SET_PROGRESS_BAR':
-      console.log({ payload });
       return {
         ...state,
         progressBarValue: payload

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import styles from './SideBar.module.css';
+import styles from './SideBar.module.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AwesomeIcons } from '../../../../../conf/AwesomeIcons';
+import { AwesomeIcons } from 'conf/AwesomeIcons';
 
 const SideBar = ({ children, options = [] }) => {
   return options.map((option, i) => (

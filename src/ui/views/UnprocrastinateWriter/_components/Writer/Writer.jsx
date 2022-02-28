@@ -3,13 +3,13 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 
 import isNil from 'lodash/isNil';
 
-import typeWriter1 from '../../../../assets/sounds/effects/typeWriter1.wav';
-import typeWriter2 from '../../../../assets/sounds/effects/typeWriter2.mp3';
-import typeWriterBell from '../../../../assets/sounds/effects/typeWriterBell.mp3';
+import typeWriter1 from 'ui/assets/sounds/effects/typeWriter1.wav';
+import typeWriter2 from 'ui/assets/sounds/effects/typeWriter2.mp3';
+import typeWriterBell from 'ui/assets/sounds/effects/typeWriterBell.mp3';
 
-import styles from './Writer.module.css';
+import styles from './Writer.module.scss';
 
-import { fontState, writerSoundState, writerTextState } from '../../../../../store';
+import { fontState, writerSoundState, writerTextState } from 'store';
 
 const Writer = () => {
   const fontOptions = useRecoilValue(fontState);
