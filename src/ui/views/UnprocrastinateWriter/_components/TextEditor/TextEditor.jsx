@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import styles from './TextEditor.module.scss';
 
@@ -10,8 +10,13 @@ import { InputText } from 'ui/views/_components/InputText';
 
 import { fontState } from 'store';
 
+import { languagesAtom, messagesAtom } from 'ui/tools/Atoms/MessagesAtoms';
+
 const TextEditor = () => {
   const [fontOptions, setFontOptions] = useRecoilState(fontState);
+
+  const language = useRecoilValue(languagesAtom);
+  const messages = useRecoilValue(messagesAtom);
 
   const getSelectElement = fontValue => fontOptions.fontFamilyList.find(font => font.value === fontValue);
 
@@ -25,7 +30,7 @@ const TextEditor = () => {
   return (
     <div className={styles.textEditorWrapper}>
       <div className={styles.optionWrapper}>
-        <span>Font size:</span>
+        <span>{messages[language]['fontSize']}:</span>
         <InputText
           className={styles.fontSizeInput}
           onInput={e => onChangeFontProperty('fontSize', e.target.value)}
@@ -36,7 +41,7 @@ const TextEditor = () => {
         <span>pt</span>
       </div>
       <div className={styles.optionWrapper}>
-        <span>Font color:</span>
+        <span>{messages[language]['fontColor']}:</span>
         <InputText
           className={styles.fontColorInput}
           onInput={e => onChangeFontProperty('fontColor', e.target.value)}
@@ -45,7 +50,7 @@ const TextEditor = () => {
           value={fontOptions.fontColor}></InputText>
       </div>
       <div className={styles.optionWrapper}>
-        <span>Font family:</span>
+        <span>{messages[language]['fontFamily']}:</span>
         <InputSelect
           className={styles.fontFamilySelect}
           filterClassName={styles.fontFamilyFilter}
@@ -55,7 +60,7 @@ const TextEditor = () => {
           value={fontOptions.fontFamily}></InputSelect>
       </div>
       <div className={styles.optionWrapper}>
-        <span>Font style:</span>
+        <span>{messages[language]['fontStyle']}:</span>
         <div className={styles.fontWeightStyle}>
           <FontAwesomeIcon
             aria-hidden={false}

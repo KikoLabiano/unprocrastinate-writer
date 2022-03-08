@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Tooltip.module.scss';
 
-const Tooltip = ({ children, content, delay, direction }) => {
+const Tooltip = ({ children, content, delay, direction, tooltipClassName }) => {
   let timeout;
   const [active, setActive] = useState(false);
 
@@ -19,7 +19,9 @@ const Tooltip = ({ children, content, delay, direction }) => {
   return (
     <div className={styles.tooltipWrapper} onMouseEnter={showTip} onMouseLeave={hideTip}>
       {children}
-      {active && <div className={`${styles.tooltipTip} ${styles[direction] || 'top'}`}>{content}</div>}
+      {active && (
+        <div className={`${tooltipClassName} ${styles.tooltipTip} ${styles[direction] || 'top'}`}>{content}</div>
+      )}
     </div>
   );
 };

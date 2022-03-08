@@ -1,0 +1,1 @@
+export { GalleryThumbs } from './GalleryThumbs';

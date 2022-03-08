@@ -13,7 +13,10 @@ const SideBar = ({ children, options = [] }) => {
       key={option.id}
       style={{ top: `${option.top}px`, height: `${option.height}px` }}>
       <FontAwesomeIcon aria-hidden={false} className={styles.icon} icon={AwesomeIcons(option.icon)} />
-      {children[i]}
+      <div className={`${option.className ? option.className : ''}`} style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ flexBasis: '90%' }}>{children[i]}</div>
+        <div className={styles.sideBarLabel}>{option.label}</div>
+      </div>
     </div>
   ));
 };

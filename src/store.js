@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
 
 import defaultImage from './ui/assets/img/defaultImage.jpg';
+import grunge from './ui/assets/img/grunge.jpg';
 import winter1 from './ui/assets/img/winter1.jpg';
 import winter2 from './ui/assets/img/winter2.jpg';
 import snowHills from './ui/assets/img/snowHills.jpg';
@@ -30,6 +31,7 @@ export const backgroundState = atom({
     isPlaying: false,
     listOfBackgrounds: [
       defaultImage,
+      grunge,
       winter1,
       winter2,
       snowHills,
@@ -51,7 +53,7 @@ export const backgroundState = atom({
       stars,
       milkyWay,
       stars2,
-      stars2
+      stars3
     ],
     selectedBackground: 0
   }

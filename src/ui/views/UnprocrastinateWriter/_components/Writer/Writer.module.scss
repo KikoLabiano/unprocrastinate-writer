@@ -20,28 +20,35 @@
   scrollbar-width: thin;
   scrollbar-color: black white;
   cursor: auto;
+
+  &::placeholder {
+    color: var(--font-color);
+    font-style: italic;
+    opacity: 0.5;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgb(255, 255, 255);
+  }
 }
 
-.writerArea::placeholder {
-  color: white;
-  font-style: italic;
-  opacity: 0.5;
-}
-
-.writerArea::-webkit-scrollbar {
-  width: 10px;
-  height: 8px;
-}
-
-.writerArea::-webkit-scrollbar-track {
-  background: transparent;
-  /* border-left: 1px solid var(--gray-25);
-  border-right: 1px solid var(--gray-25); */
-}
-
-.writerArea::-webkit-scrollbar-thumb {
-  background: rgb(255, 255, 255);
-}
-
-.writerArea::-webkit-scrollbar-thumb:hover {
+.dragging {
+  border: 4px dashed gray;
+  opacity: 0.7;
+  height: 90%;
+  margin: 0 2%;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  label {
+    font-size: 2.5rem;
+    color: var(--font-color);
+  }
 }

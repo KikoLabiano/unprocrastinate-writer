@@ -8,7 +8,21 @@ export const messages = {
     openFile: 'Abrir archivo...',
     english: 'Inglés',
     spanish: 'Español',
-    writerPlaceholder: 'Comienza a escribir o arrastra un archivo'
+    writerPlaceholder: 'Comienza a escribir o arrastra un archivo',
+    backgroundGallery: 'Abrir galería de fondos',
+    backgroundGalleryTitle: 'Galería de fondos',
+    unsavedChanges: 'Cambios sin guardar',
+    previousBackground: 'Fondo anterior',
+    nextBackground: 'Fondo siguiente',
+    fontSize: 'Tamaño',
+    fontColor: 'Color',
+    fontFamily: 'Tipo',
+    fontStyle: 'Estilo',
+    searchFont: 'Buscar fuente',
+    dragFile: 'Arrastra un archivo',
+    gallery: 'Galería',
+    font: 'Fuente',
+    music: 'Música'
   },
   en: {
     fileName: 'File name',
@@ -19,6 +33,20 @@ export const messages = {
     openFile: 'Open file...',
     english: 'English',
     spanish: 'Spanish',
-    writerPlaceholder: 'Start writing or drag a file'
+    writerPlaceholder: 'Start writing or drag a file',
+    backgroundGallery: 'Open background gallery',
+    backgroundGalleryTitle: 'Background gallery',
+    unsavedChanges: 'Unsaved changes',
+    previousBackground: 'Previous background',
+    nextBackground: 'Next background',
+    fontSize: 'Size',
+    fontColor: 'Color',
+    fontFamily: 'Family',
+    fontStyle: 'Style',
+    searchFont: 'Search font',
+    dragFile: 'Drag a file',
+    gallery: 'Gallery',
+    font: 'Font',
+    music: 'Music'
   }
 };

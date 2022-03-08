@@ -10,7 +10,9 @@ import {
   faFolderOpen,
   faFont,
   faImage,
+  faImages,
   faItalic,
+  faMoon,
   faMusic,
   faPauseCircle,
   faPenSquare,
@@ -20,6 +22,7 @@ import {
   faStepBackward,
   faStepForward,
   faStopCircle,
+  faSun,
   faVolumeMute,
   faVolumeUp,
   faWindowRestore
@@ -71,6 +74,12 @@ export const AwesomeIcons = icon => {
       return faDesktop;
     case 'minimize':
       return faWindowRestore;
+    case 'gallery':
+      return faImages;
+    case 'lightTheme':
+      return faSun;
+    case 'darkTheme':
+      return faMoon;
     default:
       return faFileAlt;
   }

@@ -9,9 +9,14 @@ import { Tooltip } from 'ui/views/_components/Tooltip';
 
 import { fontState, writerTextState } from 'store';
 
+import { languagesAtom, messagesAtom } from 'ui/tools/Atoms/MessagesAtoms';
+
 const FileTitle = () => {
   const writerText = useRecoilValue(writerTextState);
   const fontOptions = useRecoilValue(fontState);
+
+  const language = useRecoilValue(languagesAtom);
+  const messages = useRecoilValue(messagesAtom);
 
   const renderTitle = () => {
     if (writerText.fileName !== '') {
@@ -21,7 +26,7 @@ const FileTitle = () => {
         return (
           <Fragment>
             <span>{writerText.fileName}</span>
-            <Tooltip content="Unsaved changes" direction="bottom">
+            <Tooltip content={messages[language]['unsavedChanges']} direction="bottom">
               <FontAwesomeIcon
                 aria-hidden={false}
                 className={styles.unsavedChanges}

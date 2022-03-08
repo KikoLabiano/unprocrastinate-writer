@@ -1,18 +1,19 @@
 .textEditorWrapper {
   margin-top: 1rem;
+  width: 17.25rem;
 }
 .fontColorInput {
   width: 75px;
   border-radius: 6px;
   background-color: transparent;
-  color: white;
+  color: var(--font-color);
   border: 1px dashed;
   padding: 0.4rem;
 }
 .fontFamilySelect {
   border-radius: 6px;
   background-color: transparent;
-  color: white;
+  color: var(--font-color);
   border: 1px dashed;
   padding: 0.4rem;
 }
@@ -23,12 +24,12 @@
   width: 135px;
   border-radius: 6px;
   background-color: transparent;
-  color: white;
+  color: var(--font-color);
   border: 1px dashed;
   padding: 0.4rem;
 }
 .fontFamilyFilter::placeholder {
-  color: white;
+  color: var(--font-color);
   font-style: italic;
   opacity: 0.7;
 }
@@ -36,7 +37,7 @@
   width: 50px;
   border-radius: 6px;
   background-color: transparent;
-  color: white;
+  color: var(--font-color);
   border: 1px dashed;
   padding: 0.4rem;
 }

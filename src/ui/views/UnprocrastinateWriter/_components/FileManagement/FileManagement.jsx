@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import isNil from 'lodash/isNil';
 
@@ -24,6 +24,7 @@ const FileManagement = () => {
   const messages = useRecoilValue(messagesAtom);
 
   const [fullScreen, setFullScreen] = useState(false);
+  const inputFileRef = useRef();
   const toastRef = useRef();
 
   // useEffect(() => {
@@ -65,29 +66,44 @@ const FileManagement = () => {
     setFullScreen(!fullScreen);
   };
 
-  const onOpenFile = () => {
-    const electron = window.require('electron');
-    const fs = window.require('fs');
-    const dialog = electron.remote.dialog;
-    dialog
-      .showOpenDialog({
-        properties: ['openFile', 'multiSelections']
-      })
-      .then(result => {
-        fs.readFile(result.filePaths[0], 'utf-8', (err, data) => {
-          if (err) {
-            console.error('An error ocurred reading the file :' + err.message);
-            return;
-          }
-          const inmWriterText = { ...writerText };
-          inmWriterText.text = data;
-          inmWriterText.fileName = result.filePaths[0];
-          setWriterText(inmWriterText);
-        });
-      })
-      .catch(err => {
-        console.error(err);
-      });
+  const onOpenFile = event => {
+    const file = event.target.files[0];
+    console.log(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsText(file, 'UTF-8');
+      reader.onload = evt => {
+        const inmWriterText = { ...writerText };
+        inmWriterText.text = evt.target.result;
+        inmWriterText.fileName = file.name;
+        setWriterText(inmWriterText);
+      };
+      // reader.onerror = function (evt) {
+      //     document.getElementById("fileContents").innerHTML = "error reading file";
+      // }
+    }
+    // const electron = window.require('electron');
+    // const fs = window.require('fs');
+    // const dialog = electron.remote.dialog;
+    // dialog
+    //   .showOpenDialog({
+    //     properties: ['openFile', 'multiSelections']
+    //   })
+    //   .then(result => {
+    //     fs.readFile(result.filePaths[0], 'utf-8', (err, data) => {
+    //       if (err) {
+    //         console.error('An error ocurred reading the file :' + err.message);
+    //         return;
+    //       }
+    //       const inmWriterText = { ...writerText };
+    //       inmWriterText.text = data;
+    //       inmWriterText.fileName = result.filePaths[0];
+    //       setWriterText(inmWriterText);
+    //     });
+    //   })
+    //   .catch(err => {
+    //     console.error(err);
+    //   });
   };
 
   // const onSaveAsFile = () => {
@@ -185,11 +201,12 @@ const FileManagement = () => {
         </Tooltip>
       </div>
       <Tooltip content={messages[language]['openFile']} direction="bottom">
+        <input accept=".txt" type="file" hidden id="file" onChange={onOpenFile} ref={inputFileRef} />
         <FontAwesomeIcon
           aria-hidden={false}
           className={styles.fileManagementButton}
           icon={AwesomeIcons('folder')}
-          onClick={onOpenFile}
+          onClick={() => inputFileRef.current.click()}
         />
       </Tooltip>
       <Tooltip content={messages[language]['saveFile']} direction="bottom">

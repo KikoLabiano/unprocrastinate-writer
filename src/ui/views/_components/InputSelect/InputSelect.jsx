@@ -1,5 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 
+import { useRecoilValue } from 'recoil';
+
 import first from 'lodash/first';
 import isEmpty from 'lodash/isEmpty';
 
@@ -8,6 +10,8 @@ import styles from './InputSelect.module.scss';
 import { InputText } from '../InputText';
 
 import { inputSelectReducer } from './_functions/Reducers/inputSelectReducer';
+
+import { languagesAtom, messagesAtom } from 'ui/tools/Atoms/MessagesAtoms';
 
 const InputSelect = ({
   className,
@@ -25,6 +29,9 @@ const InputSelect = ({
     filter: '',
     selectValue: value.value
   });
+
+  const language = useRecoilValue(languagesAtom);
+  const messages = useRecoilValue(messagesAtom);
 
   const { filter, filteredOptions, isFiltered, selectValue } = inputSelectState;
 
@@ -53,7 +60,7 @@ const InputSelect = ({
         <InputText
           className={filterClassName}
           onChange={e => onHandleFilter(e.target.value)}
-          placeholder="Search font..."
+          placeholder={messages[language]['searchFont']}
           type="text"
           value={filter}></InputText>
       )}

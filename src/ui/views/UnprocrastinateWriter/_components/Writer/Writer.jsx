@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import isNil from 'lodash/isNil';
@@ -16,12 +16,16 @@ import { languagesAtom, messagesAtom } from 'ui/tools/Atoms/MessagesAtoms';
 const Writer = () => {
   const fontOptions = useRecoilValue(fontState);
   const writerSoundOptions = useRecoilValue(writerSoundState);
-  const [writerText, setWriterText] = useRecoilState(writerTextState);
 
   const language = useRecoilValue(languagesAtom);
   const messages = useRecoilValue(messagesAtom);
 
+  const [writerText, setWriterText] = useRecoilState(writerTextState);
+
   const audioRef = useRef();
+
+  const [isDragging, setIsDragging] = useState(false);
+
   // const writerFont = fontOptions.fontFamilyList.filter(font => font.value === fontOptions.fontFamily.value) ;
 
   const onChange = value => {
@@ -32,6 +36,35 @@ const Writer = () => {
       inmWriterText.hasUnsavedChanges = true;
     }
     setWriterText(inmWriterText);
+  };
+
+  const onDragOver = e => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const onDragLeave = () => {
+    console.log('LEAVE');
+    setIsDragging(false);
+  };
+
+  const onDropFile = event => {
+    event.stopPropagation();
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    console.log(file);
+    if (file && file.type === 'text/plain') {
+      const reader = new FileReader();
+      reader.readAsText(file, 'UTF-8');
+      reader.onload = evt => {
+        const inmWriterText = { ...writerText };
+        inmWriterText.text = evt.target.result;
+        inmWriterText.fileName = file.name;
+        setWriterText(inmWriterText);
+      };
+    }
+    setIsDragging(false);
   };
 
   const onKeyDown = e => {
@@ -55,25 +88,32 @@ const Writer = () => {
   };
 
   return (
-    <>
-      <textarea
-        className={styles.writerArea}
-        onChange={e => onChange(e.target.value)}
-        onKeyDown={e => onKeyDown(e)}
-        placeholder={messages[language]['writerPlaceholder']}
-        rows={30}
-        style={{
-          color: fontOptions.fontColor,
-          fontFamily: fontOptions.fontFamilyList.find(font => font.value === fontOptions.fontFamily.value).value,
-          fontSize: `${fontOptions.fontSize}pt`,
-          fontStyle: fontOptions.fontStyle,
-          fontWeight: fontOptions.fontWeight
-        }}
-        value={writerText.text}></textarea>
+    <div
+      className={isDragging ? styles.dragging : ''}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}
+      onDrop={onDropFile}>
+      {isDragging && <label>{messages[language]['dragFile']}</label>}
+      {!isDragging && (
+        <textarea
+          className={styles.writerArea}
+          onChange={e => onChange(e.target.value)}
+          onKeyDown={e => onKeyDown(e)}
+          placeholder={messages[language]['writerPlaceholder']}
+          rows={30}
+          style={{
+            color: fontOptions.fontColor,
+            fontFamily: fontOptions.fontFamilyList.find(font => font.value === fontOptions.fontFamily.value).value,
+            fontSize: `${fontOptions.fontSize}pt`,
+            fontStyle: fontOptions.fontStyle,
+            fontWeight: fontOptions.fontWeight
+          }}
+          value={writerText.text}></textarea>
+      )}
       <audio className="audio-element" ref={audioRef}>
         <source src={typeWriter2}></source>
       </audio>
-    </>
+    </div>
   );
 };
 

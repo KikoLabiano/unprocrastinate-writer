@@ -1,0 +1,88 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalContent {
+  background-color: transparent;
+  border-radius: 6px;
+  margin: auto;
+  border: 1px solid white;
+  animation: modalScale 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  width: 70vw;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.modalBody {
+  padding: 0 30px 10px 30px;
+}
+
+.modalHeader {
+  height: 35px;
+  margin-bottom: 1rem;
+  padding: 10px 0 5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid white;
+  h2 {
+    color: var(--font-color);
+    font-weight: bold;
+  }
+}
+
+.modalFooter {
+  height: 45px;
+  margin-bottom: 1rem;
+  padding: 0 30px 0 30px;
+}
+
+.close {
+  width: 30px;
+  height: 30px;
+  background-color: var(--dialog-close-icon-bg-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  transition: background 0.2s;
+  &:hover {
+    background-color: var(--dialog-close-icon-hover-bg-color);
+  }
+  span {
+    color: var(--dialog-close-icon-color);
+    font-size: 28px;
+    font-weight: bold;
+  }
+}
+
+.close:hover,
+.close:focus {
+  text-decoration: none;
+  cursor: pointer;
+}
+.visible {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@keyframes modalScale {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
