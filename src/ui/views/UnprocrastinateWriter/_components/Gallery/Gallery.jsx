@@ -21,22 +21,6 @@ const Gallery = ({ numberOfBackgrounds }) => {
   const language = useRecoilValue(languagesAtom);
   const messages = useRecoilValue(messagesAtom);
 
-  // const backgroundInterval = useRef(0);
-
-  // useEffect(() => {
-  //   if (backgroundProperties.isPlaying) {
-  //     console.log('ENTRO');
-  //     backgroundInterval.current = setInterval(() => {
-  //       console.log('llego');
-  //       onNextBackground();
-  //     }, 5000);
-  //     console.log({ backgroundInterval });
-  //   } else {
-  //     console.log({ backgroundInterval });
-  //     clearInterval(backgroundInterval.current);
-  //   }
-  // }, [backgroundProperties.isPlaying]);
-
   const onPreviousBackground = () => {
     const inmBackgroundProperties = { ...backgroundProperties };
     if (inmBackgroundProperties.selectedBackground === 0) {
@@ -48,30 +32,23 @@ const Gallery = ({ numberOfBackgrounds }) => {
   };
 
   const onNextBackground = () => {
-    console.log('onNextBackground');
     const inmBackgroundProperties = { ...backgroundProperties };
-    console.log(inmBackgroundProperties.selectedBackground, numberOfBackgrounds - 1);
     if (inmBackgroundProperties.selectedBackground === numberOfBackgrounds - 1) {
       inmBackgroundProperties.selectedBackground = 0;
     } else {
       inmBackgroundProperties.selectedBackground = inmBackgroundProperties.selectedBackground + 1;
     }
-    console.log(inmBackgroundProperties.selectedBackground);
     setBackground(inmBackgroundProperties);
   };
 
-  // const onTogglePlayGallery = () => {
-  //   const inmBackgroundProperties = { ...backgroundProperties };
-
-  //   inmBackgroundProperties.isPlaying = !inmBackgroundProperties.isPlaying;
-  //   setBackground(inmBackgroundProperties);
-  // };
-
   const onSelectBackground = background => {
-    console.log(background);
-    console.log(backgroundProperties.listOfBackgrounds.indexOf(background));
     const inmBackgroundProperties = { ...backgroundProperties };
-    inmBackgroundProperties.selectedBackground = backgroundProperties.listOfBackgrounds.indexOf(background);
+    inmBackgroundProperties.selectedBackground = backgroundProperties.listOfBackgrounds
+      .map(back => {
+        return back.img;
+      })
+      .indexOf(background);
+
     setBackground(inmBackgroundProperties);
   };
 
@@ -90,13 +67,22 @@ const Gallery = ({ numberOfBackgrounds }) => {
       <Tooltip content={messages[language]['nextBackground']} direction="top" tooltipClassName={styles.tooltip}>
         <FontAwesomeIcon aria-hidden={false} icon={AwesomeIcons('arrowRight')} onClick={onNextBackground} />
       </Tooltip>
+      <Tooltip content={messages[language]['backgroundLink']} direction="top" tooltipClassName={styles.tooltip}>
+        <FontAwesomeIcon
+          aria-hidden={false}
+          icon={AwesomeIcons('link')}
+          onClick={() =>
+            window.open(backgroundProperties.listOfBackgrounds[backgroundProperties.selectedBackground].link)
+          }
+        />
+      </Tooltip>
       <Dialog
         onClose={() => setIsGalleryVisible(false)}
         title={messages[language]['backgroundGalleryTitle']}
         visible={isGalleryVisible}>
         <GalleryThumbs
           onSelectBackground={onSelectBackground}
-          selectedBackground={backgroundProperties.listOfBackgrounds[backgroundProperties.selectedBackground]}
+          selectedBackground={backgroundProperties.listOfBackgrounds[backgroundProperties.selectedBackground].img}
         />
       </Dialog>
     </div>

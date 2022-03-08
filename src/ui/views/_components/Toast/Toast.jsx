@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import styles from './Toast.module.scss';
 
 const Toast = ({ message = '', inputRef }) => {
-  console.log(inputRef);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -14,9 +13,9 @@ const Toast = ({ message = '', inputRef }) => {
     }
   }, [isVisible]);
 
-  const show = () => {
-    setIsVisible(true);
-  };
+  // const show = () => {
+  //   setIsVisible(true);
+  // };
 
   return (
     isVisible && (

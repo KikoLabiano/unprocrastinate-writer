@@ -45,7 +45,6 @@ const FileManagement = () => {
       .catch(err => {
         console.error('Error in copying text: ', err);
       });
-    console.log(toastRef);
     if (!isNil(toastRef.current)) {
       toastRef.current.show();
     }
@@ -68,7 +67,6 @@ const FileManagement = () => {
 
   const onOpenFile = event => {
     const file = event.target.files[0];
-    console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.readAsText(file, 'UTF-8');
@@ -160,7 +158,7 @@ const FileManagement = () => {
   const onSaveFile = () => {
     download(
       writerText.text,
-      !writerText.fileName.includes('.txt') ? `${writerText.fileName}.txt'` : writerText.fileName
+      !writerText.fileName.includes('.txt') ? `${writerText.fileName}.txt` : writerText.fileName
     );
     // download(writerText.text, 'myfilename.txt', 'text/plain');
   };

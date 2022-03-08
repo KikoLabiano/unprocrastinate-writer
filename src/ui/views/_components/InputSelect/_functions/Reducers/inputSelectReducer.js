@@ -1,7 +1,6 @@
 export const inputSelectReducer = (state, { type, payload }) => {
   switch (type) {
     case 'SET_VALUE':
-      console.log(payload);
       return {
         ...state,
         selectValue: payload

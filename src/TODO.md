@@ -14,7 +14,7 @@ _ Plane background color
 _ Background fixed (when you reduce font size the background also reduces)
 #Fonts editor - Done
 #Save/Load text - Done
-#Absolute paths
+#Absolute paths - Done
 #Sounds (typewriter) -> Array of sounds?
 #Refactor
 #Tooltips

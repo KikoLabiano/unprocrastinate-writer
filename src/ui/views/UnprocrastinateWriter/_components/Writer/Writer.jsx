@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 
 import isNil from 'lodash/isNil';
 
-import typeWriter1 from 'ui/assets/sounds/effects/typeWriter1.wav';
+// import typeWriter1 from 'ui/assets/sounds/effects/typeWriter1.wav';
 import typeWriter2 from 'ui/assets/sounds/effects/typeWriter2.mp3';
 import typeWriterBell from 'ui/assets/sounds/effects/typeWriterBell.mp3';
 
@@ -29,7 +29,6 @@ const Writer = () => {
   // const writerFont = fontOptions.fontFamilyList.filter(font => font.value === fontOptions.fontFamily.value) ;
 
   const onChange = value => {
-    console.log(value);
     const inmWriterText = { ...writerText };
     inmWriterText.text = value;
     if (inmWriterText.fileName !== '') {
@@ -45,7 +44,6 @@ const Writer = () => {
   };
 
   const onDragLeave = () => {
-    console.log('LEAVE');
     setIsDragging(false);
   };
 
@@ -53,7 +51,6 @@ const Writer = () => {
     event.stopPropagation();
     event.preventDefault();
     const file = event.dataTransfer.files[0];
-    console.log(file);
     if (file && file.type === 'text/plain') {
       const reader = new FileReader();
       reader.readAsText(file, 'UTF-8');

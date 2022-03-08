@@ -6,6 +6,7 @@ import {
   faDesktop,
   faEdit,
   faExclamationCircle,
+  faExternalLinkAlt,
   faFileAlt,
   faFolderOpen,
   faFont,
@@ -80,6 +81,8 @@ export const AwesomeIcons = icon => {
       return faSun;
     case 'darkTheme':
       return faMoon;
+    case 'link':
+      return faExternalLinkAlt;
     default:
       return faFileAlt;
   }

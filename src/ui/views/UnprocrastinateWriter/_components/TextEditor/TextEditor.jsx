@@ -21,7 +21,6 @@ const TextEditor = () => {
   const getSelectElement = fontValue => fontOptions.fontFamilyList.find(font => font.value === fontValue);
 
   const onChangeFontProperty = (fontProperty, fontPropertyValue) => {
-    console.log(fontPropertyValue);
     const inmFontOptions = { ...fontOptions };
     inmFontOptions[fontProperty] = fontPropertyValue;
     setFontOptions(inmFontOptions);

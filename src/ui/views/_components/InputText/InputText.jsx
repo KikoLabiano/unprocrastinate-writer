@@ -10,7 +10,6 @@ const InputText = ({
   type = 'text',
   value
 }) => {
-  console.log(value);
   return (
     <input
       className={className}

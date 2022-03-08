@@ -8,17 +8,16 @@ export const GalleryThumbs = ({ onSelectBackground, selectedBackground }) => {
   const backgroundProperties = useRecoilValue(backgroundState);
 
   const renderBackgrounds = () => {
-    console.log(backgroundProperties.listOfBackgrounds);
     return (
       <div className={styles.galleryThumbsWrapper}>
         {backgroundProperties.listOfBackgrounds.map(background => (
           <div className={styles.thumbWrapper}>
             <img
               alt=""
-              className={`${styles.thumb} ${selectedBackground === background ? styles.selectedBackground : ''}`}
+              className={`${styles.thumb} ${selectedBackground === background.img ? styles.selectedBackground : ''}`}
               key={background}
-              onClick={() => onSelectBackground(background)}
-              src={background}
+              onClick={() => onSelectBackground(background.img)}
+              src={background.img}
             />
           </div>
         ))}

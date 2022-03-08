@@ -5,17 +5,17 @@ import { backgroundState } from 'store';
 
 import styles from './UnprocrastinateWriter.module.scss';
 
-import { AwesomeIcons } from 'conf/AwesomeIcons';
+// import { AwesomeIcons } from 'conf/AwesomeIcons';
 import { FileManagement } from './_components/FileManagement';
 import { FileTitle } from './_components/FileTitle';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Gallery } from './_components/Gallery';
 import { MusicPlayer } from './_components/MusicPlayer';
 import { SideBar } from './_components/SideBar';
 import { TextEditor } from './_components/TextEditor';
 import { Writer } from './_components/Writer';
 
-import { useDarkMode } from 'ui/tools/Hooks/useDarkMode';
+// import { useDarkMode } from 'ui/tools/Hooks/useDarkMode';
 
 import { languagesAtom, messagesAtom } from 'ui/tools/Atoms/MessagesAtoms';
 
@@ -25,13 +25,13 @@ const UnprocrastinateWriter = () => {
   const language = useRecoilValue(languagesAtom);
   const messages = useRecoilValue(messagesAtom);
 
-  const [isDarkMode, setIsDarkMode] = useDarkMode();
+  // const [isDarkMode, setIsDarkMode] = useDarkMode();
 
   return (
     <div
       className={styles.background}
       style={{
-        backgroundImage: `url(${backgroundProperties.listOfBackgrounds[backgroundProperties.selectedBackground]})`
+        backgroundImage: `url(${backgroundProperties.listOfBackgrounds[backgroundProperties.selectedBackground].img})`
       }}>
       {/* <div className={styles.themeSwitcher}>
         <FontAwesomeIcon

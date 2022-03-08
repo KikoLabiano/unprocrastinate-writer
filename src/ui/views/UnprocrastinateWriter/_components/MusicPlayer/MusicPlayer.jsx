@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useReducer } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import isNil from 'lodash/isNil';
 
@@ -11,7 +11,10 @@ import DanielBirchBrokenSurfaces2 from 'ui/assets/sounds/music/DanielBirchBroken
 
 import { AwesomeIcons } from 'conf/AwesomeIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { WaveViewer } from './_components/WaveViewer';
+import { Tooltip } from 'ui/views/_components/Tooltip';
+// import { WaveViewer } from './_components/WaveViewer';
+
+import { languagesAtom, messagesAtom } from 'ui/tools/Atoms/MessagesAtoms';
 
 import { writerSoundState } from 'store';
 import { musicPlayerReducer } from './_functions/Reducers/musicPlayerReducer';
@@ -20,6 +23,8 @@ const MusicPlayer = () => {
   const audioRef = useRef();
   const progressBarRef = useRef();
 
+  const language = useRecoilValue(languagesAtom);
+  const messages = useRecoilValue(messagesAtom);
   const [writerSoundOptions, setWriterSoundOptions] = useRecoilState(writerSoundState);
 
   const [musicPlayerState, musicPlayerDispatcher] = useReducer(musicPlayerReducer, {
@@ -27,9 +32,24 @@ const MusicPlayer = () => {
     isRandomActive: false,
     listOfSongs: [AlexMasonAttempts, AlexMasonPrisoner, DanielBirchBrokenSurfaces2],
     listOfSongsData: [
-      { title: 'Attemps', author: 'Alex Mason', album: 'Albion' },
-      { title: 'Prisoner', author: 'Alex Mason', album: 'Albion' },
-      { title: 'Broken surfaces 2', author: 'Daniel Birch', album: 'Restless States' }
+      {
+        title: 'Attemps',
+        author: 'Alex Mason',
+        album: 'Albion',
+        link: 'https://freemusicarchive.org/music/alex-mason'
+      },
+      {
+        title: 'Prisoner',
+        author: 'Alex Mason',
+        album: 'Albion',
+        link: 'https://freemusicarchive.org/music/alex-mason'
+      },
+      {
+        title: 'Broken surfaces 2',
+        author: 'Daniel Birch',
+        album: 'Restless States',
+        link: 'https://freemusicarchive.org/music/Daniel_Birch'
+      }
     ],
     playingSong: 0,
     progressBarValue: 0,
@@ -47,7 +67,6 @@ const MusicPlayer = () => {
 
   useEffect(() => {
     if (!isNil(audioRef) && !isNil(audioRef.current)) {
-      console.log({ volume });
       audioRef.current.volume = volume;
     }
   }, [volume]);
@@ -58,7 +77,6 @@ const MusicPlayer = () => {
       audioRef.current.src = listOfSongs[playingSong];
       audioRef.current.load();
 
-      console.log(audioRef.current.currentSrc);
       if (isPlaying) {
         audioRef.current.currentTime = 0;
         audioRef.current.play();
@@ -74,7 +92,6 @@ const MusicPlayer = () => {
   };
 
   const onChangeVolume = e => {
-    console.log(e.target.value);
     musicPlayerDispatcher({ type: 'SET_VOLUME', payload: e.target.value / 100 });
   };
 
@@ -98,10 +115,8 @@ const MusicPlayer = () => {
   const onPlayMusic = () => {
     if (!isNil(audioRef) && !isNil(audioRef.current)) {
       if (!isPlaying) {
-        console.log('PLAY', audioRef.current.currentTime);
         audioRef.current.play();
       } else {
-        console.log('PAUSE', audioRef.current.currentTime);
         audioRef.current.pause();
       }
       musicPlayerDispatcher({ type: 'SET_IS_PLAYING', payload: !isPlaying });
@@ -135,7 +150,6 @@ const MusicPlayer = () => {
 
   const onUpdateSongProgress = e => {
     if (!isNil(audioRef) && !isNil(audioRef.current)) {
-      console.log(isPlaying, audioRef.current.currentTime);
       if (isPlaying) {
         musicPlayerDispatcher({
           type: 'SET_PROGRESS_BAR',
@@ -169,6 +183,14 @@ const MusicPlayer = () => {
         />
         <FontAwesomeIcon
           aria-hidden={false}
+          className={`${isRandomActive ? [styles.randomSelected, styles.musicPlayerControlPressed].join(' ') : ''} ${
+            styles.musicPlayerControlsButton
+          }`}
+          icon={AwesomeIcons('random')}
+          onClick={onRandomSong}
+        />
+        <FontAwesomeIcon
+          aria-hidden={false}
           className={styles.musicPlayerControlsButton}
           icon={AwesomeIcons('nextSong')}
           onClick={onNextSong}
@@ -193,31 +215,43 @@ const MusicPlayer = () => {
         />
       </div>
       <div>
+        {!isNil(playingSong) && (
+          <div className={styles.songInfo}>
+            {`${listOfSongsData[playingSong].title} - ${listOfSongsData[playingSong].author} (${listOfSongsData[playingSong].album})`}{' '}
+            <FontAwesomeIcon
+              aria-hidden={false}
+              icon={AwesomeIcons('link')}
+              onClick={() => window.open(listOfSongsData[playingSong].link)}
+            />
+          </div>
+        )}
+        <div className={`${styles.equalizer} ${isPlaying ? styles.active : ''}`}>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+      </div>
+      <Tooltip content={messages[language]['typingSound']} direction="right" tooltipClassName={styles.tooltip}>
         <FontAwesomeIcon
           aria-hidden={false}
-          className={`${isRandomActive ? [styles.randomSelected, styles.musicPlayerControlPressed].join(' ') : ''} ${
-            styles.musicPlayerControlsButton
-          }`}
-          icon={AwesomeIcons('random')}
-          onClick={onRandomSong}
+          className={`${
+            writerSoundOptions.isSoundActive
+              ? [styles.soundTypewriterActive, styles.musicPlayerControlPressed].join(' ')
+              : styles.soundTypewriterDeactive
+          } ${styles.soundTypewriter} ${styles.musicPlayerControlsButton}`}
+          icon={AwesomeIcons('volume')}
+          onClick={onToggleTypeWriterSoundOff}
         />
-      </div>
-      {!isNil(playingSong) && (
-        <div
-          className={
-            styles.songInfo
-          }>{`${listOfSongsData[playingSong].title} - ${listOfSongsData[playingSong].author} (${listOfSongsData[playingSong].album})`}</div>
-      )}
-      <FontAwesomeIcon
-        aria-hidden={false}
-        className={`${
-          writerSoundOptions.isSoundActive
-            ? [styles.soundTypewriterActive, styles.musicPlayerControlPressed].join(' ')
-            : styles.soundTypewriterDeactive
-        } ${styles.soundTypewriter} ${styles.musicPlayerControlsButton}`}
-        icon={AwesomeIcons('volume')}
-        onClick={onToggleTypeWriterSoundOff}
-      />
+      </Tooltip>
       <audio className="audio-element" ref={audioRef} onTimeUpdate={onUpdateSongProgress}>
         <source src={listOfSongs[playingSong]}></source>
       </audio>

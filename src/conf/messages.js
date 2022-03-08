@@ -22,7 +22,9 @@ export const messages = {
     dragFile: 'Arrastra un archivo',
     gallery: 'Galería',
     font: 'Fuente',
-    music: 'Música'
+    music: 'Música',
+    backgroundLink: 'Abrir página del autor',
+    typingSound: 'Sonido de escritura'
   },
   en: {
     fileName: 'File name',
@@ -47,6 +49,8 @@ export const messages = {
     dragFile: 'Drag a file',
     gallery: 'Gallery',
     font: 'Font',
-    music: 'Music'
+    music: 'Music',
+    backgroundLink: 'Open author page',
+    typingSound: 'Typing sound'
   }
 };

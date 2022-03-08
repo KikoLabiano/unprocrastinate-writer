@@ -61,6 +61,10 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  align-items: center;
+  svg {
+    margin-left: 0.5rem;
+  }
 }
 .soundTypeWriter {
   cursor: pointer;
@@ -70,4 +74,63 @@
 }
 .soundTypewriterDeactive {
   opacity: 0.5;
+}
+
+.tooltip {
+  left: 45px !important;
+}
+
+.equalizer {
+  font-size: 0;
+  margin: 0.5rem 0;
+  i {
+    background-color: #fff;
+    content: '';
+    display: inline-block;
+    height: 30px;
+    width: 3px;
+    margin: 0 3px;
+    transform-origin: bottom left;
+  }
+}
+
+.active {
+  i {
+    animation: move-up-and-down 0.3s infinite alternate;
+  }
+}
+
+$delay: (0.3s, 0.1s, 0.2s, 0.1s, 0.2s, 0.2s, 0.1s, 0.2s, 0.2s, 0.1s, 0.3s, 0.2s);
+$bgcolors: (
+  #9400d3,
+  #4b0082,
+  #0000ff,
+  #00ff00,
+  #ffff00,
+  #ff7f00,
+  #ff0000,
+  #ff7f00,
+  #ffff00,
+  #00ff00,
+  #0000ff,
+  #4b0082,
+  #9400d3
+);
+
+@for $i from 1 through length($delay) {
+  i:nth-of-type(#{$i}) {
+    animation-delay: nth($delay, $i);
+    // background-color: nth($bgcolors, $i);
+  }
+}
+
+@keyframes move-up-and-down {
+  0% {
+    opacity: 0.3;
+    transform: scaleY(0.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }
