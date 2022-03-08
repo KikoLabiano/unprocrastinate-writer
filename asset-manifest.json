@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/unprocrastinate-writer/static/css/main.0f5d8070.css",
-    "main.js": "/unprocrastinate-writer/static/js/main.1718d918.js",
+    "main.js": "/unprocrastinate-writer/static/js/main.e40a266b.js",
     "static/js/377.2e1e2098.chunk.js": "/unprocrastinate-writer/static/js/377.2e1e2098.chunk.js",
     "static/media/AlexMasonPrisoner.mp3": "/unprocrastinate-writer/static/media/AlexMasonPrisoner.33a1e1712983d79f72e2.mp3",
     "static/media/DanielBirchBrokenSurfaces2.mp3": "/unprocrastinate-writer/static/media/DanielBirchBrokenSurfaces2.6fe6ccd608e6df53c189.mp3",
@@ -35,11 +35,11 @@
     "static/media/typeWriter2.mp3": "/unprocrastinate-writer/static/media/typeWriter2.04333dd551f11be4a7ec.mp3",
     "index.html": "/unprocrastinate-writer/index.html",
     "main.0f5d8070.css.map": "/unprocrastinate-writer/static/css/main.0f5d8070.css.map",
-    "main.1718d918.js.map": "/unprocrastinate-writer/static/js/main.1718d918.js.map",
+    "main.e40a266b.js.map": "/unprocrastinate-writer/static/js/main.e40a266b.js.map",
     "377.2e1e2098.chunk.js.map": "/unprocrastinate-writer/static/js/377.2e1e2098.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0f5d8070.css",
-    "static/js/main.1718d918.js"
+    "static/js/main.e40a266b.js"
   ]
 }
