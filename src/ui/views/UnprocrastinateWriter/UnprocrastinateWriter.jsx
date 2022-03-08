@@ -33,14 +33,14 @@ const UnprocrastinateWriter = () => {
       style={{
         backgroundImage: `url(${backgroundProperties.listOfBackgrounds[backgroundProperties.selectedBackground]})`
       }}>
-      <div className={styles.themeSwitcher}>
+      {/* <div className={styles.themeSwitcher}>
         <FontAwesomeIcon
           aria-hidden={false}
           className={styles.themeButton}
           icon={AwesomeIcons(isDarkMode ? 'lightTheme' : 'darkTheme')}
           onClick={() => setIsDarkMode(!isDarkMode)}
         />
-      </div>
+      </div> */}
       <SideBar
         options={[
           {
